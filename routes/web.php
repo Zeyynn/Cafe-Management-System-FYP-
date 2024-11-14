@@ -6,5 +6,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Homepage
+
 Route::get("/")
 ;
