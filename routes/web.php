@@ -10,3 +10,12 @@ Route::get('/', function () {
 
 Route::get("/")
 ;
+
+Route::get('/header', function () {
+    return view('include.userHeader');
+});
+
+Route::get('/feedback', function () {
+    return view('Manage Feedback.FeedbackPage');
+});
+
