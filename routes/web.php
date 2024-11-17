@@ -19,3 +19,10 @@ Route::get('/feedback', function () {
     return view('Manage Feedback.FeedbackPage');
 });
 
+Route::get('/login', function () {
+    return view('Manage Login.LoginPage');
+});
+
+Route::get('/menu', function () {
+    return view('Manage Menu.HomePage');
+});
