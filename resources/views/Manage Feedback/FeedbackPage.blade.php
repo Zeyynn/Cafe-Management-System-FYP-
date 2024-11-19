@@ -553,8 +553,7 @@
         <div class="overlap-2">
           <div class="nama">
             <div class="overlap-3">
-              <div class="rectangle-2"></div>
-              <div class="text-wrapper-8">Full Name*</div>
+                <input class="rectangle-2" type="text" id="full-name" name="full-name" placeholder="Enter your full name" required />
             </div>
           </div>
           <div class="overlap-wrapper">
@@ -562,14 +561,12 @@
           </div>
           <div class="overlap-group-wrapper">
             <div class="overlap-4">
-              <div class="rectangle-3"></div>
-              <div class="text-wrapper-8">Email*</div>
+              <input class="rectangle-2" type="text" id="full-name" name="full-name" placeholder="Enter your full name" required />
             </div>
           </div>
           <div class="nama-2">
             <div class="overlap-5">
-              <div class="rectangle-4"></div>
-              <p class="text-wrapper-10">What topic you are up to?</p>
+              <input class="rectangle-2" type="text" id="full-name" name="full-name" placeholder="Enter your full name" required />
               <div class="icon-wrapper-h">
                 <div class="height-change-size">
                   <div class="ignore"></div>

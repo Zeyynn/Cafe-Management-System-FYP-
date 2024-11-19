@@ -146,8 +146,7 @@
             <nav class="breadcrumbs">
                 <a href="#" class="breadcrumb-link">Order</a>
                 <a href="#" class="breadcrumb-link">Stores</a>
-                <img class="artboard" src="img/Language.png" alt="Language Icon" />
-                <a href="#" class="breadcrumb-link">English</a>
+                <hr>
             </nav>
 
             <button class="profile-button">

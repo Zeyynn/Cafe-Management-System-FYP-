@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Artifika:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arvo:wght@400&display=swap" />
     <link rel="stylesheet" href="{{ asset('css/HomePage.css') }}">
+    
     @vite('resources/css/HomePage.css')
     <script>
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {

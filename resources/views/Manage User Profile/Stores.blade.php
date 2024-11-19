@@ -265,7 +265,7 @@ button {
   z-index: 13;
   border-radius: 25px;
 }
-.image-4 {
+#map {
   position: absolute;
   width: 375px;
   height: 319px;
@@ -308,16 +308,37 @@ button {
 }
 
     </style>
+    <script>
+        function initMap() {
+            var location = {lat: 3.2175969696899296, lng: 101.73854527648746};
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: location
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+        
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyQu2bNr1JPHtpnEV1p5MxIy1QI77YnA8&callback=initMap">
+
+    </script>
+
   </head>
   <body>
+    
     <div class="main-container">
       <div class="rectangle">
         <div class="removal">
+            <a href="/menu">
             <img class="logo" src="img/duwa1.png" alt="Logo" />
+            </a>
         </div>
         <button class="rectangle-button"></button
-        ><span class="profile">Profile</span><span class="text-2">English </span
-        ><span class="text-3">Stores</span><span class="text-4">Order</span>
+        ><span class="profile">Profile</span>
+        <span class="text-3">Stores</span><span class="text-4">Order</span>
         <div class="pic"></div>
       </div>
       <div class="section">
@@ -327,12 +348,10 @@ button {
         <img class="image-2" src="/img/store2.png">
         <span class="duwa-delights">Duwa Delights</span>
         <div class="duck-icon-pin"></div>
-        <span class="address"
-          >No 7, 0, Jalan 3/4c, Desa Melawati, 53100 Kuala Lumpur, Wilayah
-          Persekutuan Kuala Lumpur</span
-        >
-        <img class="image-3" src="/img/store2.png">
-        <div class="image-4"></div> 
+        <span class="address">No 7, 0, Jalan 3/4c, Desa Melawati, 53100 Kuala Lumpur, Wilayah
+          Persekutuan Kuala Lumpur</span>
+        <img class="image-3" src="/img/store3.png"> <div class="image-4"></div> 
+        <div id="map"></div> 
         <img class="image-5" src="/img/store4.png" >
       </div>
     </div>

@@ -29,3 +29,11 @@ Route::get('/menu', function () {
 Route::get('/store', function () {
     return view('Manage User Profile.Stores');
 })->name('stores');
+
+Route::get('/menu', function () {
+    return view('Manage Menu.HomePage');
+})->name('menu');
+
+Route::get('/payment', function () {
+    return view('Manage Payment.PaymentPage');
+})->name('menu');
