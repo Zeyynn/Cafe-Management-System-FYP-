@@ -3018,3 +3018,6 @@
     z-index: 159;
   }
   
+  html {
+    scroll-behavior: smooth;
+}
