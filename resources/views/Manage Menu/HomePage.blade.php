@@ -28,12 +28,13 @@
     <div class="main-container">
       <div class="rectangle">
         <div class="flex-row-bb">
+          <img class="logo" src="img/duwa1.png" alt="Logo" />
           <div class="removal"></div>
           <a href="/order" class="order-link">
             <button class="rectangle-1"></button>
             <span class="order">Order</span>
           </a>
-          <a href="/stores" class="stores-link">
+          <a href="{{ route('stores') }}" class="stores-link">
             <span class="stores">Stores</span>
           </a>
           <div class="artboard"></div>
@@ -58,6 +59,7 @@
       <div class="flex-row">
         <div class="rectangle-3">
           <div class="aec-cfb-e-bf-aeeec"></div>
+          <img class="chicken-pesto-pizza" src="/img/margherita.png" />
           <div class="flex-column">
             <span class="classic-margherita">Classic Margherita</span
             ><span class="fresh-marinara"
@@ -69,6 +71,7 @@
         </div>
         <div class="rectangle-5">
           <div class="barbecue-bacon-pizza"></div>
+          <img class="chicken-pesto-pizza" src="/img/meatmadness.png" />
           <div class="flex-column-ba">
             <span class="meat-madness">Meat Madness</span
             ><span class="meat-mania"
@@ -81,6 +84,7 @@
       </div>
       <div class="flex-row-be">
         <div class="rectangle-9">
+          <img class="chicken-pesto-pizza" src="/img/pestopizza.png" />
           <div class="chicken-pesto-pizza"></div>
           <div class="flex-column-a">
             <span class="creamy-chicken-pesto">Creamy Chicken Pesto</span
@@ -93,6 +97,7 @@
         </div>
         <div class="rectangle-e">
           <div class="image"></div>
+          <img class="chicken-pesto-pizza" src="/img/bbqbacon.png" />
           <div class="flex-column-fba">
             <span class="bbq-bacon-mushroom">BBQ Bacon Mushroom</span
             ><span class="our-bbq-mushroom-bacon-pizza"
@@ -110,6 +115,7 @@
       </section>
       <div class="flex-row-be-12">
         <div class="rectangle-13">
+          <img class="chicken-pesto-pizza" src="/img/pesto.png" />
           <div class="flex-row-14">
             <div class="pesto-pasta"></div>
             <span class="basil-pesto">Basil Pesto</span
@@ -127,6 +133,7 @@
         </div>
         <div class="rectangle-1a">
           <div class="spaghetti-aglio-olio-seafood"></div>
+          <img class="chicken-pesto-pizza" src="/img/aglioolio.png" />
           <div class="flex-column-ead">
             <span class="aglio-olio">Aglio Olio</span
             ><span class="spaghetti-aglio-olio"
@@ -141,6 +148,7 @@
       </div>
       <div class="flex-row-1e">
         <div class="rectangle-1f">
+          <img class="chicken-pesto-pizza" src="/img/macncheese.png" />
           <div class="flex-row-dbae">
             <div class="image-20"></div>
             <span class="mac-cheese">Mac & Cheese</span
@@ -156,6 +164,7 @@
           </div>
         </div>
         <div class="rectangle-26">
+          <img class="chicken-pesto-pizza" src="/img/pesto.png" />
           <div class="flex-row-eb">
             <div class="image-27"></div>
             <span class="alfredo">Alfredo</span
@@ -176,6 +185,7 @@
       </section>
       <div class="flex-row-2e">
         <div class="rectangle-2f">
+          <img class="chicken-pesto-pizza" src="/img/pumpkin.png" />
           <div class="flex-row-30">
             <div class="image-31"></div>
             <span class="pumpkin">Pumpkin</span
@@ -191,6 +201,7 @@
           </div>
         </div>
         <div class="rectangle-37">
+          <img class="chicken-pesto-pizza" src="/img/mushroom.png" />
           <div class="flex-row-b-38">
             <div class="image-39"></div>
             <span class="pumpkin-3a">Pumpkin</span
@@ -210,6 +221,7 @@
       <span class="dessert-41">| Dessert</span>
       </section>
       <div class="rectangle-42">
+        <img class="chicken-pesto-pizza" src="/img/creme.png" />
         <div class="flex-row-43">
           <div class="image-44"></div>
           <span class="creme-brulee">Creme Brulee</span
@@ -227,8 +239,8 @@
       </section>
       <div class="flex-row-f">
         <div class="rectangle-4d">
+          <img class="chicken-pesto-pizza" src="/img/meatball.png" />
           <div class="flex-row-b-4e">
-            <div class="image-4f"></div>
             <span class="meatball-and-mash">Meatball and Mash</span
             ><span class="meatball-and-mash-description"
               >This Meatball and Mash is a hearty dish with juicy meatballs and
@@ -242,6 +254,7 @@
           </div>
         </div>
         <div class="rectangle-54">
+          <img class="chicken-pesto-pizza" src="/img/tenders.png" />
           <div class="flex-row-db">
             <div class="image-55"></div>
             <span class="chicken-tenders">Chicken Tenders</span
@@ -262,6 +275,7 @@
       </section>
       <div class="flex-row-fc">
         <div class="rectangle-5b">
+          <img class="chicken-pesto-pizza" src="/img/americano.png" />
           <div class="flex-row-d-5c">
             <div class="image-5d"></div>
             <span class="americano">Americano</span
@@ -277,8 +291,8 @@
           </div>
         </div>
         <div class="rectangle-64">
+          <img class="chicken-pesto-pizza" src="/img/mocha.png" />
           <div class="flex-row-a-65">
-            <div class="image-66"></div>
             <span class="mocha">Mocha</span
             ><span class="mocha-description"
               >This Mocha is a perfect blend of rich espresso, velvety
@@ -294,8 +308,8 @@
       </div>
       <div class="flex-row-f-6d">
         <div class="rectangle-6e">
+          <img class="chicken-pesto-pizza" src="/img/cafe.png" />
           <div class="flex-row-ca">
-            <div class="image-6f"></div>
             <span class="cafe-latte">Cafe Latte</span
             ><span class="cafe-latte-description"
               >This Café Latte is a smooth combination of rich espresso and
@@ -309,8 +323,8 @@
           </div>
         </div>
         <div class="rectangle-74">
+          <img class="chicken-pesto-pizza" src="/img/cappuccino.png" />
           <div class="flex-row-e-75">
-            <div class="image-76"></div>
             <span class="cappuccino">Cappuccino</span
             ><span class="cappuccino-description"
               >This Cappuccino is a frothy mix of rich espresso, steamed milk,
@@ -326,8 +340,8 @@
       </div>
       <div class="flex-row-ed-7d">
         <div class="rectangle-7e">
+          <img class="chicken-pesto-pizza" src="/img/choco.png" />
           <div class="flex-row-7f">
-            <div class="image-80"></div>
             <span class="dark-chocolate">Dark Chocolate</span
             ><span class="dark-chocolate-description"
               >This Dark Hot Chocolate is a rich, velvety blend of smooth dark
@@ -341,8 +355,8 @@
           </div>
         </div>
         <div class="rectangle-86">
+          <img class="chicken-pesto-pizza" src="/img/matcha.png" />
           <div class="flex-row-f-87">
-            <div class="image-88"></div>
             <span class="matcha-latte">Matcha Latte</span
             ><span class="matcha-latte-description"
               >This Matcha Latte is a smooth blend of earthy matcha green tea

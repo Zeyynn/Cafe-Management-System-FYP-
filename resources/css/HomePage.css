@@ -3017,6 +3017,18 @@
     white-space: nowrap;
     z-index: 159;
   }
+
+  .classic-margherita {
+    position: absolute;
+    width: 224.038px;
+    height: 200.864px;
+    top: 14px;
+    left: 16px;
+    background: url(./assets/images/38b00205-c19c-4846-adb9-f2d0c34d20ed.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 30;
+  }
   
   html {
     scroll-behavior: smooth;

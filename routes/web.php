@@ -10,7 +10,6 @@ Route::get('/', function () {
 
 //Homepage
 
-
 Route::get('/header', function () {
     return view('include.userHeader');
 });
@@ -26,3 +25,7 @@ Route::get('/login', function () {
 Route::get('/menu', function () {
     return view('Manage Menu.HomePage');
 });
+
+Route::get('/store', function () {
+    return view('Manage User Profile.Stores');
+})->name('stores');
