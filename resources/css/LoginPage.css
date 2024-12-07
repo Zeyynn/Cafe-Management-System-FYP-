@@ -1,0 +1,219 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+      "Source Han Sans CN", sans-serif;
+  }
+  
+  .main-container {
+    overflow: hidden;
+  }
+  
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: 0;
+  }
+  
+  .main-container {
+    position: relative;
+    width: 548px;
+    height: 707px;
+    margin: 0 auto;
+  }
+  .removal {
+    position: relative;
+    width: 201px;
+    height: 110px;
+    margin: 42px 0 0 170px;
+    background: url(./assets/images/3384425fe9b81c4fb27576b225d2a40bf8fe4877.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 4;
+  }
+  .welcome {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    width: 273px;
+    height: 39px;
+    margin: 23px 0 0 134px;
+    color: #264695;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 38.938px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  .email {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 31px 0 0 85px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  .rectangle {
+    position: relative;
+    width: 385px;
+    height: 49px;
+    margin: 4px 0 0 82px;
+    background: #ffffff;
+    border: 1px solid #b1b1b1;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .password {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 22px 0 0 85px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 6;
+  }
+  .no-account {
+    display: block;
+    position: relative;
+    height: 25px;
+    margin: 155px 0 0 85px;
+    color: #292e56;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 12;
+  }
+  .guest {
+    display: block;
+    position: relative;
+    height: 25px;
+    margin: 96px 0 0 178px;
+    color: #292e56;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 13;
+  }
+  .rectangle-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #f4f5fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .rectangle-2 {
+    position: absolute;
+    width: 70.26%;
+    height: 6.93%;
+    top: 52.62%;
+    left: 14.96%;
+    background: #ffffff;
+    border: 1px solid #b1b1b1;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .main-content {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 376px;
+    left: 420px;
+    background: url(./assets/images/9656a188e7ba438d87343b9ab4f35597fad0b3e2.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 7;
+  }
+  .rectangle-button {
+    position: absolute;
+    width: 70.26%;
+    height: 6.93%;
+    top: 64.78%;
+    left: 14.96%;
+    cursor: pointer;
+    background: #353a67;
+    border: none;
+    z-index: 8;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .login-span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 273px;
+    height: 29px;
+    top: 468px;
+    left: 138px;
+    color: #ffffff;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 11;
+  }
+  .rectangle-button-3 {
+    position: absolute;
+    width: 70.26%;
+    height: 6.93%;
+    top: 80.62%;
+    left: 14.96%;
+    cursor: pointer;
+    background: #353a67;
+    border: none;
+    z-index: 9;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .sign-up-span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 273px;
+    height: 29px;
+    top: 578px;
+    left: 138px;
+    color: #ffffff;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 10;
+  }

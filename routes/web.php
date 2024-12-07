@@ -20,7 +20,7 @@ Route::get('/feedback', function () {
 
 Route::get('/login', function () {
     return view('Manage Login.LoginPage');
-});
+})->name('login');
 
 Route::get('/menu', function () {
     return view('Manage Menu.HomePage');

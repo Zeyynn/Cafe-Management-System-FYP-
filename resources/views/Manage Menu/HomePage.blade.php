@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Artifika:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arvo:wght@400&display=swap" />
     <link rel="stylesheet" href="{{ asset('css/HomePage.css') }}">
-    
     @vite('resources/css/HomePage.css')
     <script>
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {
@@ -23,24 +22,33 @@
         });
     });
 });
+function openForm() {
+  document.getElementById("signin").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("signin").style.display = "none";
+}
     </script>
   </head>
   <body>
+    
     <div class="main-container">
+      
       <div class="rectangle">
+        
         <div class="flex-row-bb">
           <img class="logo" src="img/duwa1.png" alt="Logo" />
           <div class="removal"></div>
-          <a href="/order" class="order-link">
-            <button class="rectangle-1"></button>
+            <span class="rectangle-1"></span>
             <span class="order">Order</span>
-          </a>
           <a href="{{ route('stores') }}" class="stores-link">
             <span class="stores">Stores</span>
           </a>
           <div class="artboard"></div>
-          
+          <a href="{{ route('login') }}" class="login-link">
           <span class="sign-in">Sign In</span>
+          </a>
         </div>
         <div class="flex-row-c">
           <a href="#sourdough-pizza" class="sourdough-pizza">| Sourdough Pizza</a>
@@ -62,8 +70,8 @@
           <div class="aec-cfb-e-bf-aeeec"></div>
           <img class="chicken-pesto-pizza" src="/img/margherita.png" />
           <div class="flex-column">
-            <span class="classic-margherita">Classic Margherita</span
-            ><span class="fresh-marinara"
+            <span class="classic-margherita">Classic Margherita</span>
+            <span class="fresh-marinara"
               >Made with fresh marinara sauce, mozzarella cheese, and
               basil</span
             ><span class="price">RM 20.00</span
