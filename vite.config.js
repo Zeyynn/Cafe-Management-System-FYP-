@@ -11,7 +11,7 @@ export default defineConfig({
       },
     plugins: [
         laravel({
-            input: ['resources/css/HomePage.css', 'resources/css/PaymentPage.css', 'resources/css/app.css', 'resources/js/app.js' , 'resources/css/LoginPage.css'],
+            input: ['resources/css/HomePage.css', 'resources/css/PaymentPage.css', 'resources/css/app.css', 'resources/js/app.js' , 'resources/css/LoginPage.css', 'resources/css/ProfilePage.css'],
             plugins: [vue(), tailwindcss()],
             alias: {'@': '/resources/js',}
         }),

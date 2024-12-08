@@ -37,3 +37,7 @@ Route::get('/menu', function () {
 Route::get('/payment', function () {
     return view('Manage Payment.PaymentPage');
 })->name('menu');
+
+Route::get('/profile', function () {
+    return view('Manage User Profile.ProfilePage');
+})->name('profile');

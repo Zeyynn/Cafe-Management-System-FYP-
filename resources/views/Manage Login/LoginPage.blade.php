@@ -51,7 +51,6 @@
       <span class="sign-up-span">Sign Up</span>
     </div>
   </div>
-
   </body>
 </html>
 

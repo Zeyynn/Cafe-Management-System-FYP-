@@ -1,0 +1,593 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+      "Source Han Sans CN", sans-serif;
+  }
+  
+  .main-container {
+    overflow: hidden;
+  }
+  
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: 0;
+  }
+  
+  .main-container {
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    margin: 0 auto;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .rectangle {
+    position: relative;
+    width: 1440px;
+    height: 256px;
+    margin: 9px 0 0 0;
+    background: #f4f5ff;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .removal {
+    position: absolute;
+    width: 201px;
+    height: 110px;
+    top: 33px;
+    left: 100px;
+    background: url(./assets/images/3384425fe9b81c4fb27576b225d2a40bf8fe4877.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 11;
+  }
+  .rectangle-button {
+    position: absolute;
+    width: 116.858px;
+    height: 45.429px;
+    top: 38px;
+    left: 1167px;
+    cursor: pointer;
+    background: #353a66;
+    border: none;
+    z-index: 35;
+    border-radius: 113px;
+  }
+  .profile {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24.878px;
+    top: 49px;
+    left: 1194px;
+    color: #ffffff;
+    font-family: Fira Sans, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 36;
+  }
+  .english {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 49px;
+    left: 1032px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 9;
+  }
+  .stores {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 49px;
+    left: 909px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 8;
+  }
+  .order {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 49px;
+    left: 812px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 7;
+  }
+  .artboard {
+    position: absolute;
+    width: 26px;
+    height: 24px;
+    top: 49px;
+    left: 999px;
+    background: url(./assets/images/f226a5f894dd05e61e788b9bbca38a5e2aa640f0.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 10;
+  }
+  .flex-row-b {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 1026px;
+    height: 44px;
+    margin: 40px 0 0 104px;
+    z-index: 5;
+  }
+  .user-profile-1 {
+    flex-shrink: 0;
+    position: relative;
+    height: 44px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 43.805px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 4;
+  }
+  .preferences {
+    flex-shrink: 0;
+    position: relative;
+    height: 44px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 43.805px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  .flex-row-ed {
+    position: relative;
+    width: 1442px;
+    height: 487px;
+    margin: 15px 0 0 56px;
+    z-index: 33;
+  }
+  .rectangle-2 {
+    position: absolute;
+    width: 91.82%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(48, 56, 134, 0.3);
+    z-index: 33;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .flex-row {
+    position: relative;
+    width: 1246px;
+    height: 27px;
+    margin: 41px 0 0 52px;
+    z-index: 27;
+  }
+  .username {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 27px;
+    top: 0;
+    left: 0;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 19;
+  }
+  .address {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 27px;
+    top: 0;
+    left: 396px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 27;
+  }
+  .preferred-food {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 27px;
+    top: 0;
+    left: 805px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 26;
+  }
+  .flex-row-f {
+    position: relative;
+    width: 685px;
+    height: 34px;
+    margin: 21px 0 0 52px;
+    z-index: 28;
+  }
+  .duwa {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 22;
+  }
+  .my-home {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 5px;
+    left: 396px;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 28;
+  }
+  .flex-row-3 {
+    position: relative;
+    width: 1246px;
+    height: 28px;
+    margin: 42px 0 0 52px;
+    z-index: 25;
+  }
+  .birthday {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 27px;
+    top: 0;
+    left: 394px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 17;
+  }
+  .preferred-drinks {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 28px;
+    top: 0;
+    left: 805px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 25;
+  }
+  .phone-number {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 27px;
+    top: 1px;
+    left: 0;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 21;
+  }
+  .flex-row-ff {
+    position: relative;
+    width: 708px;
+    height: 33px;
+    margin: 21px 0 0 52px;
+    z-index: 23;
+  }
+  .text-f {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 23;
+  }
+  .text-10 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 4px;
+    left: 389px;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 18;
+  }
+  .group-3 {
+    position: relative;
+    width: 638px;
+    height: 32px;
+    margin: 37px 0 0 48px;
+    z-index: 31;
+  }
+  .text-11 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 0;
+    left: 398px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 31;
+  }
+  .text-12 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 28px;
+    top: 4px;
+    left: 0;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.336px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 20;
+  }
+  .wrapper-4 {
+    position: relative;
+    width: 712px;
+    height: 29px;
+    margin: 21px 0 0 48px;
+    z-index: 32;
+  }
+  .text-13 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 24;
+  }
+  .text-14 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 0;
+    left: 393px;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 32;
+  }
+  .cake {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 89px;
+    left: 857px;
+    color: rgba(42, 14, 14, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 29;
+  }
+  .text-16 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 29px;
+    top: 214px;
+    left: 857px;
+    color: rgba(0, 0, 0, 0.63);
+    font-family: Artifika, var(--default-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 30;
+  }
+  .flex-row-bc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 922px;
+    height: 51px;
+    margin: 63px 0 0 244px;
+    z-index: 13;
+  }
+  .rectangle-4 {
+    display: inline-block;
+    padding: 10px 20px;
+    flex-shrink: 0;
+    position: relative;
+    width: 385px;
+    height: 49px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    z-index: 13;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  .rectangle-4:hover{
+    background-color: #e0e1f1;
+  }
+  .rectangle-4:focus{
+    outline: none;
+  }
+  .change-password {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 272px;
+    height: 24px;
+    top: 12px;
+    left: 55px;
+    color: #000000;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 14;
+  }
+  .rectangle-5 {
+    flex-shrink: 0;
+    position: relative;
+    width: 385px;
+    height: 49px;
+    background: #353a67;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  .rectangle-5:hover{
+    background-color: #2f3354;
+  }
+  .rectangle-5:focus{
+    outline:none;
+  }
+  .change-profile {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 272px;
+    height: 24px;
+    top: 11px;
+    left: 56px;
+    color: #ffffff;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  
