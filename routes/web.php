@@ -41,3 +41,9 @@ Route::get('/payment', function () {
 Route::get('/profile', function () {
     return view('Manage User Profile.ProfilePage');
 })->name('profile');
+
+Route::get('/registration', function () {
+    return view('Manage Login.RegistrationPage');
+})->name('registration');
+
+Route::post('/submit-registration', [App\Http\Controllers\RegistrationController::class, 'store']);

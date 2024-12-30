@@ -35,7 +35,7 @@
           <div class="flex-row-f">
             <span class="duwa">duwa</span>
             <span class="my-home">my home</span>
-             <!-- Here -->
+             
           </div>
           <div class="flex-row-3">
             <span class="birthday">Birthday:</span>

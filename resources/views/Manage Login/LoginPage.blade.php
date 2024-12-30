@@ -48,7 +48,8 @@
       <button class="rectangle-button"></button>
       <span class="login-span">Login</span>
       <button class="rectangle-button-3"></button>
-      <span class="sign-up-span">Sign Up</span>
+      <a href="{{ route('registration') }}" class="login-link">
+      <span class="sign-up-span">Sign Up</span></a>
     </div>
   </div>
   </body>

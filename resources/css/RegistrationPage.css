@@ -1,0 +1,229 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+      "Source Han Sans CN", sans-serif;
+  }
+  
+  .main-container {
+    overflow: hidden;
+  }
+  
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    outline: 0;
+  }
+  
+  .main-container {
+    position: relative;
+    width: 548px;
+    height: 707px;
+    margin: 0 auto;
+    font-size: 0px;
+    border-radius: 10px;
+  }
+  .username {
+    display: block;
+    position: relative;
+    height: 23px;
+    margin: 148px 0 0 82px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 9;
+  }
+  .rectangle {
+    position: relative;
+    width: 385px;
+    height: 39px;
+    margin: 4px 0 0 81px;
+    background: #ffffff;
+    border: 1px solid #353a67;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .phone-number {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 24px 0 0 81px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 14;
+  }
+  .rectangle-1 {
+    position: relative;
+    width: 385px;
+    height: 39px;
+    margin: 0 0 0 81px;
+    background: #ffffff;
+    border: 1px solid #353a67;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .email-input {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 27px 0 0 81px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .rectangle-2 {
+    position: relative;
+    width: 385px;
+    height: 39px;
+    margin: 0 0 0 81px;
+    background: #ffffff;
+    border: 1px solid #353a67;
+    z-index: 3;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .password-input {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 22px 0 0 81px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 11;
+  }
+  .rectangle-3 {
+    position: relative;
+    width: 385px;
+    height: 39px;
+    margin: 1px 0 0 81px;
+    background: #ffffff;
+    border: 1px solid #353a67;
+    z-index: 4;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .reenter-password-input {
+    display: block;
+    position: relative;
+    height: 24px;
+    margin: 24px 0 0 82px;
+    color: #353a67;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 12;
+  }
+  .rectangle-4 {
+    position: relative;
+    width: 385px;
+    height: 39px;
+    margin: 4px 0 0 81px;
+    background: #ffffff;
+    border: 1px solid #353a67;
+    z-index: 5;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .rectangle-5 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #f4f5fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .rectangle-6 {
+    position: absolute;
+    width: 100%;
+    height: 15.98%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background: #353a67;
+    border: none;
+    z-index: 7;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .sign-up {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 272px;
+    height: 34px;
+    top: 39px;
+    left: 138px;
+    color: #ffffff;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 34px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 8;
+  }
+  .rectangle-7 {
+    position: absolute;
+    width: 70.26%;
+    height: 6.93%;
+    top: 86.42%;
+    left: 14.96%;
+    cursor: pointer;
+    background: #353a67;
+    border: none;
+    z-index: 6;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .sign-up-8 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 272px;
+    height: 24px;
+    top: 622px;
+    left: 129px;
+    color: #ffffff;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 13;
+  }
+  
