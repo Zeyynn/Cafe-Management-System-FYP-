@@ -47,3 +47,7 @@ Route::get('/registration', function () {
 })->name('registration');
 
 Route::post('/submit-registration', [App\Http\Controllers\RegistrationController::class, 'store']);
+
+Route::get('/success', function () {
+    return view('Manage Login.RegistrationSuccess');
+});

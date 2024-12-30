@@ -28,7 +28,6 @@
         <div class="sign-up">Sign Up</div>
         <button type="submit" class="rectangle-7"></button>
         <span class="sign-up-8">Sign Up</span>
-
     </div>
   </body>
 </html>

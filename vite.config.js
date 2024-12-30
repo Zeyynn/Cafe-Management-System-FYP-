@@ -17,7 +17,8 @@ export default defineConfig({
               'resources/js/app.js' , 
               'resources/css/LoginPage.css', 
               'resources/css/ProfilePage.css', 
-              'resources/css/RegistrationPage.css'],
+              'resources/css/RegistrationPage.css',
+              'resources/css/RegistrationSuccess.css'],
             plugins: [vue(), tailwindcss()],
             alias: {'@': '/resources/js',}
         }),
