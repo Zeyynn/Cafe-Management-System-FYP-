@@ -30,16 +30,14 @@ class RegistrationController extends Controller
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        // Debug: Log saved user
-        \Log::info('User Saved:', $user->toArray());
-
-        return redirect()->back()->with('success', 'Registration successful!');
+        // Redirect to success page
+        return redirect()->route('registration.success');
     } catch (\Exception $e) {
-        // Debug: Log any errors
+        // Log any errors
         \Log::error('Error saving user: ' . $e->getMessage());
 
+        // Redirect back with errors
         return redirect()->back()->withErrors(['error' => 'An error occurred: ' . $e->getMessage()]);
     }
 }
-
 }

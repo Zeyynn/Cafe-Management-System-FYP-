@@ -51,10 +51,10 @@ Route::post('/submit-registration', [App\Http\Controllers\RegistrationController
 
 Route::post('/submit-registration', [RegistrationController::class, 'store']);
 
-Route::get('/success', function () {
-    return view('Manage Login.RegistrationSuccess');
-});
-
 Route::get('/home', function () {
     return view('Manage Menu.MenuPage');
 });
+
+Route::get('/registration-success', function () {
+    return view('Manage Login.RegistrationSuccess');
+})->name('registration.success');
