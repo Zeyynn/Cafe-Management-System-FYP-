@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Artifika:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arvo:wght@400&display=swap" />
     <link rel="stylesheet" href="{{ asset('css/HomePage.css') }}">
-    @vite('resources/css/HomePage.css')
+    @vite('resources/css/MenuPage.css')
     <script>
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -46,8 +46,8 @@ function closeForm() {
             <span class="stores">Stores</span>
           </a>
           <div class="artboard"></div>
-          <a href="{{ route('login') }}" class="login-link">
-          <span class="sign-in">Sign In</span>
+          <a href="{{ route('profile') }}" class="profile-link">
+          <span class="sign-in">Profile</span>
           </a>
         </div>
         <div class="flex-row-c">
@@ -67,20 +67,27 @@ function closeForm() {
       </section>
       <div class="flex-row">
         <div class="rectangle-3">
+          <div class="aec-cfb-e-bf-aeeec"></div>
           <img class="chicken-pesto-pizza" src="/img/margherita.png" />
           <div class="flex-column">
             <span class="classic-margherita">Classic Margherita</span>
-            <span class="fresh-marinara">Made with fresh marinara sauce, mozzarella cheese, and basil</span>
-            <span class="price">RM 20.00</span> 
+            <span class="fresh-marinara"
+              >Made with fresh marinara sauce, mozzarella cheese, and
+              basil</span
+            ><span class="price">RM 20.00</span
+            ><button class="rectangle-4"><span class="add">Add</span></button>
           </div>
         </div>
         <div class="rectangle-5">
           <div class="barbecue-bacon-pizza"></div>
           <img class="chicken-pesto-pizza" src="/img/meatmadness.png" />
           <div class="flex-column-ba">
-            <span class="meat-madness">Meat Madness</span>
-            <span class="meat-mania">Our Meat Mania Pizza comes fully loaded with pepperoni, bacon crumble, & mild sausage.</span>
-            <span class="price-6">RM 28.00</span>
+            <span class="meat-madness">Meat Madness</span
+            ><span class="meat-mania"
+              >Our Meat Mania Pizza comes fully loaded with pepperoni, bacon
+              crumble, & mild sausage.</span
+            ><span class="price-6">RM 28.00</span
+            ><button class="rectangle-7"><span class="add-8">Add</span></button>
           </div>
         </div>
       </div>
@@ -94,7 +101,7 @@ function closeForm() {
               >This Creamy Pesto Chicken Pizza has a delicious thin crust and
               juicy sun dried tomatoes.</span
             ><span class="price-b">RM 35.00</span
-            >
+            ><button class="rectangle-c"><span class="add-d">Add</span></button>
           </div>
         </div>
         <div class="rectangle-e">
@@ -106,7 +113,9 @@ function closeForm() {
               >Our BBQ Mushroom Bacon Pizza comes fully loaded with BBQ sauce,
               savory mushrooms, and crispy bacon crumble.</span
             ><span class="rm-35">RM 35.00</span
-            >
+            ><button class="rectangle-f">
+              <span class="add-10">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -126,7 +135,9 @@ function closeForm() {
             ><span class="rm-35-15">RM 35.00</span>
           </div>
           <div class="flex-row-bb-16">
-            
+            <button class="rectangle-1c">
+              <span class="add-19">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-1a">
@@ -138,7 +149,9 @@ function closeForm() {
               >This Spaghetti Aglio Olio is a simple delight with garlic-infused
               olive oil, al dente pasta, and a hint of chili.</span
             ><span class="rm-35-1b">RM 35.00</span
-            >
+            ><button class="rectangle-1c">
+              <span class="add-1d">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -154,6 +167,9 @@ function closeForm() {
             ><span class="rm-35-22">RM 35.00</span>
           </div>
           <div class="flex-row-a">
+            <div class="rectangle-23"></div>
+              <span class="add-25">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-26">
@@ -167,6 +183,9 @@ function closeForm() {
             ><span class="price-29">RM 35.00</span>
           </div>
           <div class="flex-row-d">
+            <div class="rectangle-2a"></div>
+              <span class="add-2c">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -185,6 +204,9 @@ function closeForm() {
             ><span class="price-33">RM 35.00</span>
           </div>
           <div class="flex-row-b">
+            <div class="rectangle-34"></div>
+              <span class="add-36">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-37">
@@ -198,6 +220,9 @@ function closeForm() {
             ><span class="price-3d">RM 35.00</span>
           </div>
           <div class="flex-row-fd">
+            <div class="rectangle-3e"></div>
+              <span class="add-40">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -215,6 +240,7 @@ function closeForm() {
           ><span class="price-47">RM 35.00</span>
         </div>
         <div class="flex-row-48">
+          <button class="rectangle-4a"><span class="add-4b">Add</span></button>
         </div>
       </div>
       <section id="et-cetera">
@@ -231,6 +257,9 @@ function closeForm() {
             ><span class="price-51">RM 35.00</span>
           </div>
           <div class="flex-row-ed">
+            <div class="rectangle-52"></div>
+              <span class="add-button">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-54">
@@ -244,6 +273,9 @@ function closeForm() {
             ><span class="price-57">RM 35.00</span>
           </div>
           <div class="flex-row-e">
+            <div class="rectangle-58"></div>
+              <span class="add-button-5a">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -262,6 +294,9 @@ function closeForm() {
             ><span class="price-5f">RM 6.00</span>
           </div>
           <div class="flex-row-a-60">
+            <div class="rectangle-61"></div>
+              <span class="add-button-63">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-64">
@@ -274,6 +309,9 @@ function closeForm() {
             ><span class="price-68">RM 10.00</span>
           </div>
           <div class="flex-row-fc-69">
+            <div class="rectangle-6a"></div>
+              <span class="add-button-6c">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -288,6 +326,9 @@ function closeForm() {
             ><span class="rm-price-70">RM 8.00</span>
           </div>
           <div class="flex-row-ede">
+            <div class="rectangle-71"></div>
+              <span class="add-button-73">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-74">
@@ -300,6 +341,9 @@ function closeForm() {
             ><span class="rm-price-78">RM 8.00</span>
           </div>
           <div class="flex-row-a-79">
+            <div class="rectangle-7a"></div>
+              <span class="add-button-7c">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -314,6 +358,9 @@ function closeForm() {
             ><span class="rm-price-82">RM 9.00</span>
           </div>
           <div class="flex-row-cd">
+            <div class="rectangle-83"></div>
+              <span class="add-button-85">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-86">
@@ -326,6 +373,9 @@ function closeForm() {
             ><span class="rm-price-8a">RM 12.00</span>
           </div>
           <div class="flex-row-bc">
+            <div class="rectangle-8b"></div>
+              <span class="add-button-8d">Add</span>
+            </button>
           </div>
         </div>
       </div>

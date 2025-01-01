@@ -11,6 +11,16 @@
   <body>
     <div class="main-container"> <!--The Main Container-->
 
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
+
         <form action="{{ url('/submit-registration') }}" method="POST">
         @csrf
         <span class="username">Username:</span>
@@ -22,7 +32,7 @@
         <span class="password-input">Password:</span>
         <input type="password" name="password" placeholder="Enter your password" required class="rectangle-3" />
         <span class="reenter-password-input">Re-Enter Password:</span>
-        <input type="password" name="repassword" placeholder="Re-enter your password" required class="rectangle-4" />
+        <input type="password" name="password_confirmation" placeholder="Re-enter your password" required class="rectangle-4" />
         <div class="rectangle-5"></div>
         <div class="rectangle-6"></div>
         <div class="sign-up">Sign Up</div>

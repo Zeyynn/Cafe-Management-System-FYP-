@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistrationController;
 
 
 
@@ -48,6 +49,12 @@ Route::get('/registration', function () {
 
 Route::post('/submit-registration', [App\Http\Controllers\RegistrationController::class, 'store']);
 
+Route::post('/submit-registration', [RegistrationController::class, 'store']);
+
 Route::get('/success', function () {
     return view('Manage Login.RegistrationSuccess');
+});
+
+Route::get('/home', function () {
+    return view('Manage Menu.MenuPage');
 });

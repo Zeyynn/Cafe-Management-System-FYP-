@@ -18,7 +18,8 @@ export default defineConfig({
               'resources/css/LoginPage.css', 
               'resources/css/ProfilePage.css', 
               'resources/css/RegistrationPage.css',
-              'resources/css/RegistrationSuccess.css'],
+              'resources/css/RegistrationSuccess.css',
+              'resources/css/MenuPage.css'],
             plugins: [vue(), tailwindcss()],
             alias: {'@': '/resources/js',}
         }),
