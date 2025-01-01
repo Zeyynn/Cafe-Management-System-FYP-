@@ -24,7 +24,8 @@
       <!-- The White Box (Form Area) -->
       <div>
         <!-- Login Form -->
-        <form class="login-form" action="/submit-form" method="POST">
+        <form class="login-form" action="{{ route('login.submit') }}" method="POST">
+          @csrf
           <!-- Email Input -->
           <input type="email" name="email" placeholder="Enter your email" required class="rectangle" />
           
@@ -34,6 +35,7 @@
           
           <!-- Login Button -->
           <button type="submit" class="submit-button">Login</button>
+          <button type= "submit" class="rectangle-button"></button>
         </form>
       
         <!-- Additional Texts/Links -->
@@ -45,7 +47,7 @@
       <!-- Additional Sections/Buttons -->
       <div class="rectangle-1"></div>
       <div class="main-content"></div>
-      <button class="rectangle-button"></button>
+      
       <span class="login-span">Login</span>
       <button class="rectangle-button-3"></button>
       <a href="{{ route('registration') }}" class="login-link">

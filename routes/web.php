@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LoginController;
 
 
 
@@ -23,25 +24,26 @@ Route::get('/login', function () {
     return view('Manage Login.LoginPage');
 })->name('login');
 
-Route::get('/menu', function () {
-    return view('Manage Menu.HomePage');
-});
+
 
 Route::get('/store', function () {
     return view('Manage User Profile.Stores');
 })->name('stores');
 
-Route::get('/menu', function () {
+Route::get('/home', function () {
     return view('Manage Menu.HomePage');
-})->name('menu');
+})->name('home');
 
 Route::get('/payment', function () {
     return view('Manage Payment.PaymentPage');
-})->name('menu');
+});
 
 Route::get('/profile', function () {
     return view('Manage User Profile.ProfilePage');
 })->name('profile');
+
+
+//Registration
 
 Route::get('/registration', function () {
     return view('Manage Login.RegistrationPage');
@@ -51,10 +53,20 @@ Route::post('/submit-registration', [App\Http\Controllers\RegistrationController
 
 Route::post('/submit-registration', [RegistrationController::class, 'store']);
 
-Route::get('/home', function () {
-    return view('Manage Menu.MenuPage');
-});
-
 Route::get('/registration-success', function () {
     return view('Manage Login.RegistrationSuccess');
 })->name('registration.success');
+
+//Login
+
+Route::post('/submit-login', [LoginController::class, 'login'])->name('login.submit');
+
+//Menu
+
+Route::get('/menu', function () {
+    return view('Manage Menu.MenuPage');
+})->name('menu')->middleware('auth');
+
+Route::get('/menu', function () {
+    return view('Manage Menu.MenuPage');
+});

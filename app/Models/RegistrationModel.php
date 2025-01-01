@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class RegistrationModel extends Model
+class RegistrationModel extends Authenticatable
 {
     use HasFactory;
 
     protected $table = 'duwauser';
-    protected $fillable = ['name', 'phone', 'email', 'password'];
+
+    protected $fillable = [
+        'name',
+        'phone',
+        'email',
+        'password',
+    ];
 }
