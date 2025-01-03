@@ -49,6 +49,12 @@ function closeForm() {
           <a href="{{ route('profile') }}" class="profile-link">
           <span class="sign-in">Profile</span>
           </a>
+          <a href="#" class="english" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Log Out
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
         </div>
         <div class="flex-row-c">
           <a href="#sourdough-pizza" class="sourdough-pizza">| Sourdough Pizza</a>

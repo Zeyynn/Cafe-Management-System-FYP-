@@ -18,7 +18,7 @@ class LoginController extends Controller
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         \Log::info('Login successful for email: ' . $request->email);
         $request->session()->regenerate();
-        return redirect()->route('home');
+        return redirect()->route('menu');
     }
 
     \Log::error('Login failed for email: ' . $request->email);

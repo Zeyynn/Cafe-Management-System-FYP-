@@ -1,0 +1,115 @@
+:root {
+  --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-family: var(--default-font-family);
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.rectangle {
+  width: 100%;
+  height: 80px;
+  background: #f4f5ff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.english,
+.stores,
+.order,
+.profile {
+  font-size: 18px;
+  color: #353a67;
+  margin-left: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile {
+  background: #353a67;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 20px;
+}
+
+.user-profile-heading,
+.preferences-heading {
+  font-size: 24px;
+  font-weight: 500;
+  color: #353a67;
+}
+
+.form-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 16px;
+  color: #353a67;
+  margin-bottom: 8px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.flex-row-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-button,
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #353a67;
+}
+
+.submit-button {
+  background: #353a67;
+  color: #fff;
+}
+
+.submit-button:hover {
+  background: #2f3354;
+}

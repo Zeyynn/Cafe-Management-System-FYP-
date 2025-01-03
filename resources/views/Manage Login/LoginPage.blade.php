@@ -41,8 +41,7 @@
         <!-- Additional Texts/Links -->
         <div class="extra-links">
           <span class="no-account">No account yet?</span>
-        
-      </div>
+        </div>
     
       <!-- Additional Sections/Buttons -->
       <div class="rectangle-1"></div>
@@ -52,8 +51,10 @@
       <button class="rectangle-button-3"></button>
       <a href="{{ route('registration') }}" class="login-link">
       <span class="sign-up-span">Sign Up</span></a>
+      
     </div>
   </div>
+  
   </body>
 </html>
 

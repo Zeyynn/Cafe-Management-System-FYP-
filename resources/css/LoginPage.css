@@ -217,3 +217,21 @@
     white-space: nowrap;
     z-index: 10;
   }
+
+  .back-home {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    width: 273px;
+    height: 39px;
+    margin: 23px 0 0 134px;
+    color: #264695;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 38.938px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 999;
+  }
