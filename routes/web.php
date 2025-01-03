@@ -40,7 +40,6 @@ Route::post('/change-password', [ProfileController::class, 'changePassword'])->n
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
-
     Route::get('/menu', function () {
         return view('Manage Menu.MenuPage');
     })->name('menu');

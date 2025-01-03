@@ -12,19 +12,18 @@
     <div class="main-container">
       <div class="rectangle">
         <div class="removal">
-            <img class="logo" src="img/duwa1.png" alt="Logo" />
+          <img class="logo" src="img/duwa1.png" alt="Logo" />
         </div>
-        <button class="rectangle-button"></button>
-        <span class="profile">Profile</span>
         <a href="#" class="english" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Log Out
-      </a>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
-      </form>
+        </form>
         <span class="stores">Stores</span>
         <span class="order">Order</span>
         <div class="artboard"></div>
+        <span class="profile">Profile</span>
       </div>
       <div class="flex-row-b">
         <span class="user-profile-1">User Profile</span>
@@ -35,43 +34,43 @@
           <div class="flex-row">
             <span class="username">Username:</span>
             <span class="address">Address:</span>
-            <span class="preferred-food">Preferred Food</span>
+            <span class="preferred-food">Preferred Food:</span>
           </div>
           <div class="flex-row-f">
             <span class="duwa">{{ $user->name }}</span>
-            <span class="my-home">my home</span> <!-- Keep static for now -->
+            <span class="my-home">{{ $user->address ?? 'Not Provided' }}</span>
           </div>
           <div class="flex-row-3">
             <span class="birthday">Birthday:</span>
-            <span class="preferred-drinks">Preferred Drinks</span>
+            <span class="preferred-drinks">Preferred Drinks:</span>
             <span class="phone-number">Phone Number:</span>
           </div>
           <div class="flex-row-ff">
-            <span class="text-f">{{ $user->phone }}</span>
-            <span class="text-10">1 jan 2001</span> <!-- Keep static for now -->
+            <span class="text-f">{{ $user->phone ?? 'Not Provided' }}</span>
+            <span class="text-10">{{ $user->birthday ?? 'Not Provided' }}</span>
           </div>
           <div class="group-3">
-            <span class="text-11">Gender :</span>
+            <span class="text-11">Gender:</span>
             <span class="text-12">E-mail:</span>
           </div>
           <div class="wrapper-4">
             <span class="text-13">{{ $user->email }}</span>
-            <span class="text-14">male</span> <!-- Keep static for now -->
+            <span class="text-14">{{ $user->gender ?? 'Not Provided' }}</span>
           </div>
           <div>
-        </div>
-        <span class="text-16">tea</span>
-        <span class="cake">cake</span>
+            <span class="text-16">{{ $user->drink ?? 'Not Provided' }}</span>
+            <span class="cake">{{ $user->food ?? 'Not Provided' }}</span>
+          </div>
         </div>
       </div>
       <div class="flex-row-bc">
         <button class="rectangle-4" onclick="location.href='/password'">
-            <span class="change-password">Change Password</span>
+          <span class="change-password">Change Password</span>
         </button>
         <button class="rectangle-5" onclick="location.href='/profile/edit'">
           <span class="change-profile">Change Profile</span>
         </button>
       </div>
     </div>
-    </body>
+  </body>
 </html>

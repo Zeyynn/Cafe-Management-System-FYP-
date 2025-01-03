@@ -29,6 +29,51 @@ function openForm() {
 function closeForm() {
   document.getElementById("signin").style.display = "none";
 }
+
+//Cart
+
+let cart = [];
+
+function addToCart(name, price) {
+  // Add item to cart
+  cart.push({ name, price });
+  updateCart();
+  openCartPopup();
+}
+
+function updateCart() {
+  const cartItemsContainer = document.getElementById('cartItems');
+  const cartTotalElement = document.getElementById('cartTotal');
+  
+  cartItemsContainer.innerHTML = ''; // Clear previous items
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+      <span>${item.name} RM ${item.price.toFixed(2)}</span>
+      <button onclick="removeFromCart(${index})">Remove</button>
+    `;
+    cartItemsContainer.appendChild(cartItem);
+    total += item.price;
+  });
+
+  cartTotalElement.textContent = `RM ${total.toFixed(2)}`;
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1); // Remove item from cart
+  updateCart();
+}
+
+function openCartPopup() {
+  document.getElementById('cartPopup').style.display = 'block';
+}
+
+function closeCartPopup() {
+  document.getElementById('cartPopup').style.display = 'none';
+}
     </script>
   </head>
   <body>
@@ -141,7 +186,7 @@ function closeForm() {
             ><span class="rm-35-15">RM 35.00</span>
           </div>
           <div class="flex-row-bb-16">
-            <button class="rectangle-1c">
+            <button class="rectangle-1c" onclick="addToCart('Basil Pesto', 35.00)">
               <span class="add-19">Add</span>
             </button>
           </div>
@@ -383,6 +428,18 @@ function closeForm() {
               <span class="add-button-8d">Add</span>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+    <!--Popup-->
+    <div id="cartPopup" class="cart-popup">
+      <div class="cart-content">
+        <span class="close-button" onclick="closeCartPopup()">&times;</span>
+        <h2>Your Order</h2>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+          <div class="cart-total">Total: <span id="cartTotal">RM 0.00</span></div>
+          <button class="checkout-button">Checkout</button>
         </div>
       </div>
     </div>

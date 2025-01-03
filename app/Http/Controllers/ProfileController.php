@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Duwauser;
 
 class ProfileController extends Controller
 {
     // Show Profile Page
     public function show()
     {
-        // Get the authenticated user
-        $user = Auth::user();
+        // Get the authenticated user from the Duwauser model
+        $user = Duwauser::find(Auth::id());
 
         // Return the ProfilePage view with user data
         return view('Manage User Profile.ProfilePage', compact('user'));
@@ -21,8 +22,8 @@ class ProfileController extends Controller
     // Show Edit Profile Page
     public function edit()
     {
-        // Get the authenticated user
-        $user = Auth::user();
+        // Get the authenticated user from the Duwauser model
+        $user = Duwauser::find(Auth::id());
 
         // Return the EditProfilePage view with user data
         return view('Manage User Profile.EditProfilePage', compact('user'));
@@ -31,8 +32,8 @@ class ProfileController extends Controller
     // Handle Profile Update
     public function update(Request $request)
     {
-        // Get the authenticated user
-        $user = Auth::user();
+        // Get the authenticated user from the Duwauser model
+        $user = Duwauser::find(Auth::id());
 
         // Validate the input
         $request->validate([
@@ -71,8 +72,8 @@ class ProfileController extends Controller
             'new_password' => 'required|min:6|confirmed',
         ]);
 
-        // Get the authenticated user
-        $user = Auth::user();
+        // Get the authenticated user from the Duwauser model
+        $user = Duwauser::find(Auth::id());
 
         // Check if current password matches
         if (!Hash::check($request->current_password, $user->password)) {
