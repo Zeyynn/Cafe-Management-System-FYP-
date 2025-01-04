@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/HomePage.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/MenuPage.css')
+    @vite('resources/js/cart.js')
     <script>
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -69,12 +70,51 @@ function removeFromCart(index) {
 }
 
 function openCartPopup() {
-  document.getElementById('cartPopup').style.display = 'block';
+    console.log('Opening Cart Popup');
+    const cartPopup = document.getElementById('cartPopup');
+    if (cartPopup) {
+        cartPopup.style.display = 'block'; // Make it visible
+    }
 }
 
 function closeCartPopup() {
-  document.getElementById('cartPopup').style.display = 'none';
+    console.log('Closing Cart Popup');
+    const cartPopup = document.getElementById('cartPopup');
+    if (cartPopup) {
+        cartPopup.style.display = 'none'; // Hide the popup
+    }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cartToggleButton = document.getElementById("cartToggleButton");
+  const cartPopup = document.getElementById("cartPopup");
+  const closeCartPopup = document.getElementById("closeCartPopup");
+
+  if (cartToggleButton && cartPopup && closeCartPopup) {
+    // Show the cart popup when the button is clicked
+    cartToggleButton.addEventListener("click", () => {
+      cartPopup.style.display = "flex";
+      console.log("Cart popup opened");
+    });
+
+    // Hide the cart popup when the close button is clicked
+    closeCartPopup.addEventListener("click", () => {
+      cartPopup.style.display = "none";
+      console.log("Cart popup closed");
+    });
+
+    // Hide the cart popup when clicking outside of it
+    window.addEventListener("click", (event) => {
+      if (event.target === cartPopup) {
+        cartPopup.style.display = "none";
+        console.log("Cart popup closed by clicking outside");
+      }
+    });
+  } else {
+    console.error("Required elements not found in the DOM");
+  }
+});
+
     </script>
   </head>
   <body>
@@ -198,8 +238,8 @@ function closeCartPopup() {
           </div>
           <div class="flex-row-bb-16">
             <button class="rectangle-1c" onclick="addToCart('Basil Pesto', 24.00)">
-              <span class="add-19">Add</span>
-            </button>
+              Add
+          </button>
           </div>
         </div>
         <div class="rectangle-1a">
@@ -468,6 +508,17 @@ function closeCartPopup() {
           </div>
       </div>
   </div>
-    @vite('resources/js/cart.js')
+  <button id="cartToggleButton">Open Cart</button>
+  <div class="cart-popup" id="cartPopup">
+    <div class="cart-content">
+      <span class="close-button" id="closeCartPopup">&times;</span>
+      <h2>Your Cart</h2>
+      <p>No items in the cart.</p>
+      <div class="cart-footer">
+        <span class="cart-total">Total: RM0</span>
+        <button class="checkout-button">Checkout</button>
+      </div>
+    </div>
+  </div>
   </body>
 </html>

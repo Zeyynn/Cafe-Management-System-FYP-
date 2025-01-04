@@ -1,8 +1,10 @@
-// Function to add an item to the cart
-
+// Cart management script
 let cart = [];
 
-function addToCart(name, price) {
+// Add an item to the cart
+function addToCart(itemName, itemPrice) {
+    console.log('Adding to cart:', itemName, itemPrice);
+
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -10,26 +12,24 @@ function addToCart(name, price) {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
         body: JSON.stringify({
-            item_name: name,
-            item_price: price,
+            item_name: itemName,
+            item_price: itemPrice,
             quantity: 1,
         }),
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Log response for debugging
-        if (data.success) {
-            alert('Item added to cart!');
-            updateCartUI();
-        } else {
-            alert('Failed to add item to cart.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Added to cart:', data.message);
+                updateCartUI();
+            } else {
+                console.error('Failed to add to cart:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-
-// Function to update the cart UI
+// Update the cart UI
 function updateCartUI() {
     fetch('/cart/items', {
         method: 'GET',
@@ -37,33 +37,20 @@ function updateCartUI() {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
     })
-        .then(response => response.json())
+        .then(response => response.text()) // Use text() to capture non-JSON responses
         .then(data => {
-            const cartItemsContainer = document.getElementById('cartItems');
-            const cartTotalElement = document.getElementById('cartTotal');
-            cartItemsContainer.innerHTML = ''; // Clear previous items
-
-            let total = 0;
-
-            data.items.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <span>${item.item_name} RM ${item.item_price.toFixed(2)} x ${item.quantity}</span>
-                    <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
-                `;
-                cartItemsContainer.appendChild(cartItem);
-
-                total += item.item_price * item.quantity;
-            });
-
-            cartTotalElement.textContent = `RM ${total.toFixed(2)}`;
+            console.log('Response from /cart/items:', data); // Log the response
+            try {
+                const jsonData = JSON.parse(data); // Try parsing as JSON
+                console.log('Parsed JSON:', jsonData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
         })
         .catch(error => console.error('Error updating cart UI:', error));
 }
 
-
-// Function to remove an item from the cart
+// Remove an item from the cart
 function removeFromCart(itemId) {
     fetch(`/cart/remove/${itemId}`, {
         method: 'DELETE',
@@ -83,16 +70,26 @@ function removeFromCart(itemId) {
         .catch(error => console.error('Error:', error));
 }
 
-// Function to toggle cart popup visibility
+// Toggle cart popup visibility
 function toggleCart() {
     const cartPopup = document.getElementById('cartPopup');
-    cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+
+    // Debugging: Check if element exists
+    console.log('Cart Popup:', cartPopup);
+
+    if (cartPopup) {
+        cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+    } else {
+        console.error('Cart popup not found.');
+    }
 }
 
 // Attach event listener for cart toggle button
 const cartToggleButton = document.getElementById('cartToggleButton');
 if (cartToggleButton) {
     cartToggleButton.addEventListener('click', toggleCart);
+} else {
+    console.error('Cart toggle button not found.');
 }
 
 // Close cart popup when clicking outside
@@ -104,25 +101,60 @@ window.addEventListener('click', function(event) {
 });
 
 // Automatically update the cart UI when the page loads
-document.addEventListener("DOMContentLoaded", function () {
-    updateCartUI(); // Fetch and update UI when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.add-button, .rectangle-1c');
+    console.log('Add Buttons Found:', buttons);
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const parentElement = button.closest('.flex-row, .flex-row-be, .flex-row-bb-16');
+            if (!parentElement) {
+                console.error('Parent element not found for add button.');
+                return;
+            }
+
+            const itemNameElement = parentElement.querySelector('.basil-pesto, .creamy-chicken-pesto, .classic-margherita');
+            const itemPriceElement = parentElement.querySelector('.price, .rm-35');
+
+            console.log('Item Name Element:', itemNameElement);
+            console.log('Item Price Element:', itemPriceElement);
+
+            if (!itemNameElement || !itemPriceElement) {
+                console.error('Item name or price element not found.');
+                return;
+            }
+
+            const itemName = itemNameElement.innerText;
+            const itemPrice = parseFloat(itemPriceElement.innerText.replace('RM', '').trim());
+
+            addToCart(itemName, itemPrice);
+        });
+    });
+
+    updateCartUI();
 });
 
-document.querySelector('.checkout-button').addEventListener('click', () => {
-    fetch('/cart/checkout', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Checkout successful!');
-                updateCartUI(); // Clear the cart after checkout
-            } else {
-                console.error('Checkout failed:', data.message);
-            }
+// Handle checkout functionality
+const checkoutButton = document.querySelector('.checkout-button');
+if (checkoutButton) {
+    checkoutButton.addEventListener('click', () => {
+        fetch('/cart/checkout', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
         })
-        .catch(error => console.error('Error during checkout:', error));
-});
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Checkout successful!');
+                    updateCartUI(); // Clear the cart after checkout
+                } else {
+                    console.error('Checkout failed:', data.message);
+                }
+            })
+            .catch(error => console.error('Error during checkout:', error));
+    });
+} else {
+    console.error('Checkout button not found.');
+}

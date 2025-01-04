@@ -30,6 +30,6 @@ class Duwauser extends Authenticatable
 
     public function cartItems()
     {
-    return $this->hasMany(Cart::class, 'user_id');
+        return $this->hasMany(Cart::class, 'user_id', 'id');
     }
 }

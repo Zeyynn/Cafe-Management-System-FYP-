@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MenuController;
 
 // Public Routes
 
@@ -60,6 +61,8 @@ Route::middleware('auth')->group(function () {
         return view('Manage Payment.PaymentPage');
     })->name('payment');
 
+
+
     // Logout
     Route::post('/logout', function () {
         Auth::logout();
@@ -76,5 +79,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     });
+
+    //Menu
+
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 });
 

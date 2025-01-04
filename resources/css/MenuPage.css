@@ -3083,24 +3083,25 @@
 
 /* Cart Popup Styles */
 .cart-popup {
-  display: none; /* Initially hidden */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
 .cart-content {
   background-color: white;
   width: 50%;
-  margin: 100px auto;
+  margin: auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
 }
 
 .close-button {
@@ -3108,8 +3109,6 @@
   top: 10px;
   right: 20px;
   font-size: 24px;
-  font-weight: bold;
-  color: #333;
   cursor: pointer;
 }
 

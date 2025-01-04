@@ -15,6 +15,7 @@ class CartController extends Controller
     Log::info('Add to cart request: ', $request->all());
     Log::info('Authenticated User ID: ' . Auth::id());
     
+    
     $cartItem = Cart::where('user_id', Auth::id())
         ->where('item_name', $request->item_name)
         ->first();
@@ -64,3 +65,8 @@ class CartController extends Controller
     return response()->json(['success' => false, 'message' => 'Item not found']);
     }
 }
+
+Log::info('Add to cart request payload:', $request->all());
+Log::info('Authenticated User ID:', ['id' => Auth::id()]);
+Log::info('Database check for existing item:', ['item' => $cartItem]);
+Log::info('Incoming Request: ', $request->all());
