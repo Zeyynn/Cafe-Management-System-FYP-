@@ -5,28 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
     // Add item to cart
     public function addToCart(Request $request)
 {
-    $cartItem = \App\Models\Cart::where('user_id', Auth::id())
+    Log::info('Add to cart request: ', $request->all());
+    Log::info('Authenticated User ID: ' . Auth::id());
+    
+    $cartItem = Cart::where('user_id', Auth::id())
         ->where('item_name', $request->item_name)
         ->first();
 
     if ($cartItem) {
-        // Update quantity if item already exists
         $cartItem->quantity += $request->quantity;
         $cartItem->save();
+        Log::info('Updated Cart Item: ', $cartItem->toArray());
     } else {
-        // Create new cart item
-        \App\Models\Cart::create([
-            'user_id' => Auth::id(),
+        $newCartItem = Cart::create([
+            'user_id' => Auth::id(), // Authenticated user ID
             'item_name' => $request->item_name,
             'item_price' => $request->item_price,
             'quantity' => $request->quantity,
         ]);
+        Log::info('Created Cart Item: ', $newCartItem->toArray());
     }
 
     return response()->json(['success' => true, 'message' => 'Item added to cart']);
@@ -35,7 +39,7 @@ class CartController extends Controller
     // Get all cart items
     public function getCartItems()
 {
-    $cartItems = \App\Models\Cart::where('user_id', Auth::id())->get();
+    $cartItems = Cart::where('user_id', Auth::id())->get();
 
     $total = $cartItems->sum(function ($item) {
         return $item->item_price * $item->quantity;
@@ -49,16 +53,14 @@ class CartController extends Controller
 
     // Remove an item from the cart
     public function removeFromCart($id)
-    {
-        $cartItem = Cart::where('user_id', Auth::id())
-            ->where('id', $id)
-            ->first();
+{
+    $cartItem = Cart::where('user_id', Auth::id())->where('id', $id)->first();
 
-        if ($cartItem) {
-            $cartItem->delete();
-            return response()->json(['success' => true, 'message' => 'Item removed from cart']);
-        }
+    if ($cartItem) {
+        $cartItem->delete();
+        return response()->json(['success' => true, 'message' => 'Item removed from cart']);
+    }
 
-        return response()->json(['success' => false, 'message' => 'Item not found']);
+    return response()->json(['success' => false, 'message' => 'Item not found']);
     }
 }

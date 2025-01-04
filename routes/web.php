@@ -37,6 +37,7 @@ Route::get('/registration-success', function () {
 
 // Authentication Routes
 Route::post('/submit-login', [LoginController::class, 'login'])->name('login.submit');
+
 Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('password.change');
 
 // Authenticated Routes
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
         Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+        Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     });
 });
 

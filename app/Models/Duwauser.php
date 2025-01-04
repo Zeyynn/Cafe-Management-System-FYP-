@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Duwauser extends Model
+class Duwauser extends Authenticatable
 {
     use HasFactory;
 
@@ -15,10 +15,21 @@ class Duwauser extends Model
         'name', 
         'phone', 
         'email', 
+        'password', // Ensure password is included for authentication
         'birthday', 
         'gender', 
         'address', 
         'food', 
         'drink',
     ];
+
+    protected $hidden = [
+        'password', 
+        'remember_token',
+    ];
+
+    public function cartItems()
+    {
+    return $this->hasMany(Cart::class, 'user_id');
+    }
 }

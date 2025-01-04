@@ -17,16 +17,17 @@ function addToCart(name, price) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data); // Log response for debugging
         if (data.success) {
-            cart.push({ name, price }); // Update local cart
-            updateCart(); // Refresh UI
+            alert('Item added to cart!');
             updateCartUI();
         } else {
             alert('Failed to add item to cart.');
         }
     })
-    .catch(error => console.error('Error adding to cart:', error));
+    .catch(error => console.error('Error:', error));
 }
+
 
 // Function to update the cart UI
 function updateCartUI() {
@@ -36,37 +37,29 @@ function updateCartUI() {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        const cartItemsContainer = document.getElementById('cartItems');
-        const cartTotalElement = document.getElementById('cartTotal');
-        cartItemsContainer.innerHTML = ''; // Clear previous items
+        .then(response => response.json())
+        .then(data => {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+            cartItemsContainer.innerHTML = ''; // Clear previous items
 
-        let total = 0;
-        cart = []; // Clear local cart array
+            let total = 0;
 
-        data.items.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <span>${item.item_name} RM ${item.item_price.toFixed(2)} x ${item.quantity}</span>
-                <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
-            `;
-            cartItemsContainer.appendChild(cartItem);
+            data.items.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <span>${item.item_name} RM ${item.item_price.toFixed(2)} x ${item.quantity}</span>
+                    <button class="remove-button" onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
 
-            cart.push({ // Update local cart array
-                name: item.item_name,
-                price: parseFloat(item.item_price),
-                id: item.id,
-                quantity: item.quantity,
+                total += item.item_price * item.quantity;
             });
 
-            total += item.item_price * item.quantity;
-        });
-
-        cartTotalElement.textContent = `RM ${total.toFixed(2)}`;
-    })
-    .catch(error => console.error('Error updating cart UI:', error));
+            cartTotalElement.textContent = `RM ${total.toFixed(2)}`;
+        })
+        .catch(error => console.error('Error updating cart UI:', error));
 }
 
 
@@ -78,15 +71,16 @@ function removeFromCart(itemId) {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            updateCartUI(); // Fetch updated cart from backend
-        } else {
-            alert('Failed to remove item from cart.');
-        }
-    })
-    .catch(error => console.error('Error removing item from cart:', error));
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Item removed from cart!');
+                updateCartUI();
+            } else {
+                alert('Failed to remove item.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 // Function to toggle cart popup visibility
@@ -112,4 +106,23 @@ window.addEventListener('click', function(event) {
 // Automatically update the cart UI when the page loads
 document.addEventListener("DOMContentLoaded", function () {
     updateCartUI(); // Fetch and update UI when the page loads
+});
+
+document.querySelector('.checkout-button').addEventListener('click', () => {
+    fetch('/cart/checkout', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Checkout successful!');
+                updateCartUI(); // Clear the cart after checkout
+            } else {
+                console.error('Checkout failed:', data.message);
+            }
+        })
+        .catch(error => console.error('Error during checkout:', error));
 });

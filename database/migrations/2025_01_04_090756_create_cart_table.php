@@ -15,8 +15,9 @@ return new class extends Migration
         $table->decimal('item_price', 8, 2);
         $table->integer('quantity')->default(1);
         $table->timestamps();
-
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    
+        // Define the foreign key
+        $table->foreign('user_id')->references('id')->on('duwauser')->onDelete('cascade');
     });
 }
 

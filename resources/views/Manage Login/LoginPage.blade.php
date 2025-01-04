@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Artifika:wght@400&display=swap" />
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="{{ asset('css/LoginPage.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/LoginPage.css')
   </head>
   <body>

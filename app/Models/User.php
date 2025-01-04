@@ -45,4 +45,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function cartItems()
+{
+    return $this->hasMany(Cart::class, 'user_id');
+}
+}
+class Duwauser extends Authenticatable
+{
+    protected $table = 'duwauser';
+
+    protected $fillable = [
+        'name', 'phone', 'email', 'password', 'birthday', 'gender', 'address', 'food', 'drink',
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function cartItems()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
 }
