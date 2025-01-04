@@ -5,6 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
 
 // Public Routes
 
@@ -65,4 +66,13 @@ Route::middleware('auth')->group(function () {
         request()->session()->regenerateToken();
         return redirect('/login');
     })->name('logout');
+
+    //Cart
+
+    Route::middleware(['auth'])->group(function () {
+        Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+        Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
+        Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    });
 });
+

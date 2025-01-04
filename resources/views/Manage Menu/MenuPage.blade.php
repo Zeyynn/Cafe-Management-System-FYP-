@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Artifika:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arvo:wght@400&display=swap" />
     <link rel="stylesheet" href="{{ asset('css/HomePage.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/MenuPage.css')
     <script>
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {
@@ -53,7 +54,7 @@ function updateCart() {
     cartItem.className = 'cart-item';
     cartItem.innerHTML = `
       <span>${item.name} RM ${item.price.toFixed(2)}</span>
-      <button onclick="removeFromCart(${index})">Remove</button>
+      <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>
     `;
     cartItemsContainer.appendChild(cartItem);
     total += item.price;
@@ -84,8 +85,18 @@ function closeCartPopup() {
         
         <div class="flex-row-bb">
           <img class="logo" src="img/duwa1.png" alt="Logo" />
+          @if (Auth::check())
+            <div class="auth-message">
+                Welcome, {{ Auth::user()->name }}!
+            </div>
+        @else
+            <div class="auth-message">
+                <a href="{{ route('login') }}">Log in</a> to access the menu.
+            </div>
+        @endif
           <div class="removal"></div>
             <span class="rectangle-1"></span>
+            <button id="cartToggleButton" class="cart-button">Cart</button>
             <span class="order">Order</span>
           <a href="{{ route('stores') }}" class="stores-link">
             <span class="stores">Stores</span>
@@ -137,7 +148,7 @@ function closeCartPopup() {
             ><span class="meat-mania"
               >Our Meat Mania Pizza comes fully loaded with pepperoni, bacon
               crumble, & mild sausage.</span
-            ><span class="price-6">RM 28.00</span
+            ><span class="price-6">RM 50.00</span
             ><button class="rectangle-7"><span class="add-8">Add</span></button>
           </div>
         </div>
@@ -163,7 +174,7 @@ function closeCartPopup() {
             ><span class="our-bbq-mushroom-bacon-pizza"
               >Our BBQ Mushroom Bacon Pizza comes fully loaded with BBQ sauce,
               savory mushrooms, and crispy bacon crumble.</span
-            ><span class="rm-35">RM 35.00</span
+            ><span class="rm-35">RM 40.00</span
             ><button class="rectangle-f">
               <span class="add-10">Add</span>
             </button>
@@ -183,10 +194,10 @@ function closeCartPopup() {
             ><span class="creamy-pesto-pasta"
               >This Creamy Pesto Pasta features al dente noodles, rich pesto
               sauce, and juicy cherry tomatoes.</span
-            ><span class="rm-35-15">RM 35.00</span>
+            ><span class="rm-35-15">RM 24.00</span>
           </div>
           <div class="flex-row-bb-16">
-            <button class="rectangle-1c" onclick="addToCart('Basil Pesto', 35.00)">
+            <button class="rectangle-1c" onclick="addToCart('Basil Pesto', 24.00)">
               <span class="add-19">Add</span>
             </button>
           </div>
@@ -199,7 +210,7 @@ function closeCartPopup() {
             ><span class="spaghetti-aglio-olio"
               >This Spaghetti Aglio Olio is a simple delight with garlic-infused
               olive oil, al dente pasta, and a hint of chili.</span
-            ><span class="rm-35-1b">RM 35.00</span
+            ><span class="rm-35-1b">RM 15.00</span
             ><button class="rectangle-1c">
               <span class="add-1d">Add</span>
             </button>
@@ -215,7 +226,7 @@ function closeCartPopup() {
             ><span class="mac-n-cheese"
               >This Mac n Cheese is a creamy classic with tender pasta smothered
               in rich, gooey cheese.</span
-            ><span class="rm-35-22">RM 35.00</span>
+            ><span class="rm-35-22">RM 12.00</span>
           </div>
           <div class="flex-row-a">
             <div class="rectangle-23"></div>
@@ -231,7 +242,7 @@ function closeCartPopup() {
             ><span class="pasta-alfredo"
               >This Pasta Alfredo is a creamy indulgence with tender noodles
               coated in a rich, velvety sauce.</span
-            ><span class="price-29">RM 35.00</span>
+            ><span class="price-29">RM 18.00</span>
           </div>
           <div class="flex-row-d">
             <div class="rectangle-2a"></div>
@@ -252,7 +263,7 @@ function closeCartPopup() {
             ><span class="pumpkin-soup"
               >This Pumpkin Soup is a cozy blend of creamy pumpkin, warm spices,
               and a hint of sweetness.</span
-            ><span class="price-33">RM 35.00</span>
+            ><span class="price-33">RM 12.00</span>
           </div>
           <div class="flex-row-b">
             <div class="rectangle-34"></div>
@@ -264,11 +275,11 @@ function closeCartPopup() {
           <img class="chicken-pesto-pizza" src="/img/mushroom.png" />
           <div class="flex-row-b-38">
             <div class="image-39"></div>
-            <span class="pumpkin-3a">Pumpkin</span
+            <span class="pumpkin-3a">Mushroom & Potato</span
             ><span class="pumpkin-soup-3b"
               >This Pumpkin Soup is a cozy blend of creamy pumpkin, warm spices,
               and a hint of sweetness.</span
-            ><span class="price-3d">RM 35.00</span>
+            ><span class="price-3d">RM 12.00</span>
           </div>
           <div class="flex-row-fd">
             <div class="rectangle-3e"></div>
@@ -288,7 +299,7 @@ function closeCartPopup() {
           ><span class="creme-brulee-45"
             >This Crème Brûlée is a creamy custard topped with a perfectly
             caramelized sugar crust.</span
-          ><span class="price-47">RM 35.00</span>
+          ><span class="price-47">RM 12.00</span>
         </div>
         <div class="flex-row-48">
           <button class="rectangle-4a"><span class="add-4b">Add</span></button>
@@ -305,7 +316,7 @@ function closeCartPopup() {
             ><span class="meatball-and-mash-description"
               >This Meatball and Mash is a hearty dish with juicy meatballs and
               creamy mashed potatoes.</span
-            ><span class="price-51">RM 35.00</span>
+            ><span class="price-51">RM 25.00</span>
           </div>
           <div class="flex-row-ed">
             <div class="rectangle-52"></div>
@@ -321,7 +332,7 @@ function closeCartPopup() {
             ><span class="chicken-tenders-description"
               >These Chicken Tenders are crispy on the outside, tender on the
               inside, and perfectly seasoned.</span
-            ><span class="price-57">RM 35.00</span>
+            ><span class="price-57">RM 15.00</span>
           </div>
           <div class="flex-row-e">
             <div class="rectangle-58"></div>
@@ -434,14 +445,29 @@ function closeCartPopup() {
     <!--Popup-->
     <div id="cartPopup" class="cart-popup">
       <div class="cart-content">
-        <span class="close-button" onclick="closeCartPopup()">&times;</span>
-        <h2>Your Order</h2>
-        <div id="cartItems"></div>
-        <div class="cart-footer">
-          <div class="cart-total">Total: <span id="cartTotal">RM 0.00</span></div>
-          <button class="checkout-button">Checkout</button>
-        </div>
+          <!-- Close Button -->
+          <span class="close-button" onclick="closeCartPopup()">&times;</span>
+          
+          <!-- Header -->
+          <h2>Your Order</h2>
+          
+          <!-- Cart Items -->
+          <div id="cartItems" class="cart-items">
+              <!-- Dynamically added items will appear here -->
+          </div>
+          
+          <!-- Footer -->
+          <div class="cart-footer">
+              <!-- Total Price -->
+              <div class="cart-total">
+                  <strong>Total:</strong> <span id="cartTotal">RM 0.00</span>
+              </div>
+              
+              <!-- Checkout Button -->
+              <button class="checkout-button">Checkout</button>
+          </div>
       </div>
-    </div>
+  </div>
+    @vite('resources/js/cart.js')
   </body>
 </html>
