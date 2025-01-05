@@ -22,7 +22,9 @@ export default defineConfig({
               'resources/css/MenuPage.css',
               'resources/css/EditProfilePage.css',
               'resources/js/cart.js',
-              'resources/css/ChangePasswordPage.css'],
+              'resources/css/ChangePasswordPage.css',
+              'resources/css/PaymentCompleted.css',
+              'resources/css/PaymentPage.css'],
             plugins: [vue(), tailwindcss()],
             alias: {'@': '/resources/js',}
         }),

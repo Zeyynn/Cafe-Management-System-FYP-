@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     // Add item to cart
     public function addToCart(Request $request)
 {
+    \Log::info('Add to Cart Request:', $request->all());
     $user = Auth::user(); // Get the logged-in user
 
     // Check if the item is already in the cart
@@ -58,6 +60,12 @@ class CartController extends Controller
     }
 
     return response()->json(['success' => false, 'message' => 'Item not found.']);
+}
+public function showPaymentPage() {
+    $userId = auth()->id(); // Replace with the actual user ID
+    $cartItems = DB::table('cart')->where('user_id', $userId)->get();
+
+    return view('ManagePayment.PaymentPage', compact('cartItems'));
 }
 }
 

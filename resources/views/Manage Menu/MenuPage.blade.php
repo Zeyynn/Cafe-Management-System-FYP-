@@ -535,8 +535,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function testFunction() {
         alert('JavaScript is working!');
     }
+    document.querySelectorAll('button').forEach(button => {
+    console.log(button.getAttribute('onclick'));
+});
 </script>
-<button onclick="addToCart(1, 12.00)">Add to Cart</button>
+<div class="menu-item" data-name="Pizza Margherita" data-price="12.50">
+  <span class="menu-item-name">Pizza Margherita</span>
+  <span class="menu-item-price">RM 12.50</span>
+  <button class="add-to-cart" onclick="console.log('Button clicked', 'Pizza Margherita', 12.50); addToCart('Pizza Margherita', 12.50)">Add</button>
+</div>
 </div>
   </body>
 </html>

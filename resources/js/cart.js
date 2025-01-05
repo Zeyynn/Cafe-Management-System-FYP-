@@ -3,6 +3,13 @@ let cart = [];
 
 // Add an item to the cart
 function addToCart(menuId, price) {
+    console.log('addToCart triggered with:', { menuId, price });
+    
+    if (!menuId || !price) {
+        console.error('Item name or price element not found.');
+        return;
+    }
+
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -14,13 +21,19 @@ function addToCart(menuId, price) {
             price: price,
         }),
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Fetch Response Status:', response.status);
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log('Fetch Response:', data); // Logs the backend response
-        alert('Item added to cart!'); // Success notification
+        console.log('Fetch Response Data:', data);
+        alert('Item added to cart!');
     })
     .catch(error => {
-        console.error('Fetch Error:', error); // Logs any error
+        console.error('Fetch Error:', error);
         alert('Failed to add item to cart!');
     });
 }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Models\Menu;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PaymentController;
 
 // Public Routes
 
@@ -77,7 +79,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-        Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
         Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     });
@@ -87,6 +88,13 @@ Route::middleware('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/menu', [MenuController::class, 'showMenu'])->name('menu');
     });
-   
+
+    //Payment
+
+    Route::get('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
+    Route::post('/process-checkout', [PaymentController::class, 'processCheckout'])->name('process-checkout');
+    Route::get('/payment-completed/{orderId}', [PaymentController::class, 'showPaymentCompleted'])->name('payment.completed');
+
+
 });
 
