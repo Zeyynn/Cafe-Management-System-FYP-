@@ -317,6 +317,7 @@
     height: 231px;
     margin: 28px 0 0 115px;
     z-index: 21;
+    margin-top: 0;
   }
   .rectangle-3 {
     flex-shrink: 0;

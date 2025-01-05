@@ -520,5 +520,23 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
   </div>
+  <div class="menu-item">
+    <h3>Example Menu Item</h3>
+    <p>Price: RM 12.00</p>
+    <button 
+        onclick="addToCart(1, 20.00)" 
+        class="add-to-cart-button"
+    >
+        Add to Cart
+    </button>
+    <button onclick="testFunction()">Test JavaScript</button>
+
+<script>
+    function testFunction() {
+        alert('JavaScript is working!');
+    }
+</script>
+<button onclick="addToCart(1, 12.00)">Add to Cart</button>
+</div>
   </body>
 </html>

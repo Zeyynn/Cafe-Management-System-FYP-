@@ -14,6 +14,12 @@ class Menu extends Model
     protected $fillable = [
         'name',
         'price',
-        'description',
+        'category',
     ];
+
+    public function cartItems()
+    {
+    return $this->hasMany(Cart::class);
+    }
+    
 }

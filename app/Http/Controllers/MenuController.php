@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu; // Import your Menu model
 use Illuminate\Http\Request;
+use App\Models\Menu; // Import the Menu model
 
 class MenuController extends Controller
 {
-    public function index()
+    public function showMenu()
     {
-        // Fetch all menu items
+        // Retrieve all menu items from the database
         $menuItems = Menu::all();
 
-        // Return the view with the menu items
-        return view('MenuPage', compact('menuItems'));
+        // Pass the data to the MenuPage view
+        return view('Manage Menu.MenuPage', compact('menuItems'));
     }
 }

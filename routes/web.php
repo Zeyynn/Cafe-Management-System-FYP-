@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
+use App\Models\Menu;
 
 // Public Routes
 
@@ -44,7 +45,8 @@ Route::post('/change-password', [ProfileController::class, 'changePassword'])->n
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
     Route::get('/menu', function () {
-        return view('Manage Menu.MenuPage');
+        $menuItems = Menu::all(); // Fetch all menu items from the database
+        return view('Manage Menu.MenuPage', compact('menuItems'));
     })->name('menu');
 
     // Profile Routes
@@ -73,15 +75,18 @@ Route::middleware('auth')->group(function () {
 
     //Cart
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+        Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
         Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-        Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     });
 
     //Menu
 
-    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    Route::middleware('auth')->group(function () {
+        Route::get('/menu', [MenuController::class, 'showMenu'])->name('menu');
+    });
+   
 });
 

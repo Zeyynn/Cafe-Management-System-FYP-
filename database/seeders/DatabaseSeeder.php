@@ -5,19 +5,26 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Menu;
 
-class DatabaseSeeder extends Seeder
+class MenuSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Menu::create([
+            'name' => 'Classic Margherita',
+            'description' => 'Made with fresh marinara sauce, mozzarella cheese, and basil.',
+            'price' => 20.00,
+            'image' => 'margherita.png',
         ]);
+
+        Menu::create([
+            'name' => 'Meat Madness',
+            'description' => 'Loaded with pepperoni, bacon crumble, and mild sausage.',
+            'price' => 50.00,
+            'image' => 'meatmadness.png',
+        ]);
+
+        // Add more items as needed
     }
 }

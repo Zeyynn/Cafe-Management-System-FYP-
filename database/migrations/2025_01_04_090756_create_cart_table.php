@@ -10,14 +10,10 @@ return new class extends Migration
 {
     Schema::create('cart', function (Blueprint $table) {
         $table->id();
-        $table->unsignedBigInteger('user_id');
-        $table->string('item_name');
-        $table->decimal('item_price', 8, 2);
-        $table->integer('quantity')->default(1);
-        $table->timestamps();
-    
-        // Define the foreign key
-        $table->foreign('user_id')->references('id')->on('duwauser')->onDelete('cascade');
+        $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Links to the user
+        $table->foreignId('menu_id')->constrained('menu')->onDelete('cascade'); // Links to the menu item
+        $table->integer('quantity')->default(1); // Quantity of the item
+        $table->timestamps(); // Timestamps for tracking
     });
 }
 

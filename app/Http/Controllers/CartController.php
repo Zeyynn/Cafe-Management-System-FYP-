@@ -12,58 +12,53 @@ class CartController extends Controller
     // Add item to cart
     public function addToCart(Request $request)
 {
-    Log::info('Add to cart request: ', $request->all());
-    Log::info('Authenticated User ID: ' . Auth::id());
-    
-    
-    $cartItem = Cart::where('user_id', Auth::id())
-        ->where('item_name', $request->item_name)
-        ->first();
+    $user = Auth::user(); // Get the logged-in user
+
+    // Check if the item is already in the cart
+    $cartItem = Cart::where('user_id', $user->id)
+                    ->where('menu_id', $request->menu_id)
+                    ->first();
 
     if ($cartItem) {
-        $cartItem->quantity += $request->quantity;
+        // If it exists, increment the quantity
+        $cartItem->quantity += 1;
         $cartItem->save();
-        Log::info('Updated Cart Item: ', $cartItem->toArray());
     } else {
-        $newCartItem = Cart::create([
-            'user_id' => Auth::id(), // Authenticated user ID
-            'item_name' => $request->item_name,
-            'item_price' => $request->item_price,
-            'quantity' => $request->quantity,
+        // Otherwise, create a new cart entry
+        Cart::create([
+            'user_id' => $user->id,
+            'menu_id' => $request->menu_id,
+            'quantity' => 1,
         ]);
-        Log::info('Created Cart Item: ', $newCartItem->toArray());
     }
 
-    return response()->json(['success' => true, 'message' => 'Item added to cart']);
+    return response()->json(['success' => true, 'message' => 'Item added to cart!']);
 }
 
     // Get all cart items
     public function getCartItems()
 {
-    $cartItems = Cart::where('user_id', Auth::id())->get();
+    $user = Auth::user();
 
-    $total = $cartItems->sum(function ($item) {
-        return $item->item_price * $item->quantity;
-    });
+    $cartItems = Cart::with('menuItem') // Eager load menu item details
+                     ->where('user_id', $user->id)
+                     ->get();
 
-    return response()->json([
-        'items' => $cartItems,
-        'total' => $total,
-    ]);
+    return response()->json(['cartItems' => $cartItems]);
 }
 
     // Remove an item from the cart
-    public function removeFromCart($id)
+    public function removeFromCart($cartId)
 {
-    $cartItem = Cart::where('user_id', Auth::id())->where('id', $id)->first();
+    $cartItem = Cart::find($cartId);
 
     if ($cartItem) {
         $cartItem->delete();
-        return response()->json(['success' => true, 'message' => 'Item removed from cart']);
+        return response()->json(['success' => true, 'message' => 'Item removed from cart!']);
     }
 
-    return response()->json(['success' => false, 'message' => 'Item not found']);
-    }
+    return response()->json(['success' => false, 'message' => 'Item not found.']);
+}
 }
 
 Log::info('Add to cart request payload:', $request->all());

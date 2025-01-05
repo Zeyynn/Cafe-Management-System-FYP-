@@ -2,9 +2,7 @@
 let cart = [];
 
 // Add an item to the cart
-function addToCart(itemName, itemPrice) {
-    console.log('Adding to cart:', itemName, itemPrice);
-
+function addToCart(menuId, price) {
     fetch('/cart/add', {
         method: 'POST',
         headers: {
@@ -12,62 +10,61 @@ function addToCart(itemName, itemPrice) {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         },
         body: JSON.stringify({
-            item_name: itemName,
-            item_price: itemPrice,
-            quantity: 1,
+            menu_id: menuId,
+            price: price,
         }),
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log('Added to cart:', data.message);
-                updateCartUI();
-            } else {
-                console.error('Failed to add to cart:', data.message);
-            }
-        })
-        .catch(error => console.error('Error:', error));
+    .then(response => response.json())
+    .then(data => {
+        console.log('Fetch Response:', data); // Logs the backend response
+        alert('Item added to cart!'); // Success notification
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error); // Logs any error
+        alert('Failed to add item to cart!');
+    });
 }
 
 // Update the cart UI
-function updateCartUI() {
-    fetch('/cart/items', {
-        method: 'GET',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-    })
-        .then(response => response.text()) // Use text() to capture non-JSON responses
+function fetchCartItems() {
+    fetch('/cart/items')
+        .then(response => response.json())
         .then(data => {
-            console.log('Response from /cart/items:', data); // Log the response
-            try {
-                const jsonData = JSON.parse(data); // Try parsing as JSON
-                console.log('Parsed JSON:', jsonData);
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-            }
-        })
-        .catch(error => console.error('Error updating cart UI:', error));
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = ''; // Clear previous items
+
+            let total = 0;
+            data.cartItems.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.innerHTML = `
+                    <span>${item.menuItem.name} - RM ${item.menuItem.price} x ${item.quantity}</span>
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+
+                total += item.menuItem.price * item.quantity;
+            });
+
+            document.getElementById('cartTotal').textContent = `RM ${total.toFixed(2)}`;
+        });
 }
 
 // Remove an item from the cart
-function removeFromCart(itemId) {
-    fetch(`/cart/remove/${itemId}`, {
+function removeFromCart(cartId) {
+    fetch(`/cart/remove/${cartId}`, {
         method: 'DELETE',
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Item removed from cart!');
-                updateCartUI();
-            } else {
-                alert('Failed to remove item.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            fetchCartItems(); // Refresh cart
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 // Toggle cart popup visibility
