@@ -78,9 +78,12 @@ Route::middleware('auth')->group(function () {
     //Cart
 
     Route::middleware('auth')->group(function () {
-        Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-        Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
-        Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+        Route::post('/cart/add', [CartController::class, 'addToCart']);
+        Route::get('/cart/count', [CartController::class, 'cartCount']);
+        Route::get('/cart/items', [CartController::class, 'cartItems']);
+        Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart']);
+        Route::get('/cart/items', [CartController::class, 'getCartItems']);
+        Route::delete('/cart/delete/{id}', [CartController::class, 'deleteCartItem']);
     });
 
     //Menu
@@ -88,6 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/menu', [MenuController::class, 'showMenu'])->name('menu');
     });
+    
 
     //Payment
 

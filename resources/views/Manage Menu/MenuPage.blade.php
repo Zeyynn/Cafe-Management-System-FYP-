@@ -34,95 +34,215 @@ function closeForm() {
 
 //Cart
 
-let cart = [];
+function addToCart(userId, itemName, itemPrice) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-function addToCart(name, price) {
-  // Add item to cart
-  cart.push({ name, price });
-  updateCart();
-  openCartPopup();
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            item_name: itemName,
+            item_price: itemPrice,
+            quantity: 1 // Default quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item added to cart!');
+        } else {
+            alert('Failed to add item to cart.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function updateCart() {
-  const cartItemsContainer = document.getElementById('cartItems');
-  const cartTotalElement = document.getElementById('cartTotal');
-  
-  cartItemsContainer.innerHTML = ''; // Clear previous items
-  let total = 0;
+// JS COUNTER
 
-  cart.forEach((item, index) => {
-    const cartItem = document.createElement('div');
-    cartItem.className = 'cart-item';
-    cartItem.innerHTML = `
-      <span>${item.name} RM ${item.price.toFixed(2)}</span>
-      <button class="remove-button" onclick="removeFromCart(${index})">Remove</button>
-    `;
-    cartItemsContainer.appendChild(cartItem);
-    total += item.price;
-  });
-
-  cartTotalElement.textContent = `RM ${total.toFixed(2)}`;
+function updateCartCount() {
+    fetch('/cart/count', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('cartCount').innerText = data.count || 0;
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function removeFromCart(index) {
-  cart.splice(index, 1); // Remove item from cart
-  updateCart();
+function addToCart(userId, itemName, itemPrice) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            user_id: userId,
+            item_name: itemName,
+            item_price: itemPrice,
+            quantity: 1 // Default quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item added to cart!');
+            updateCartCount(); // Update the cart count
+        } else {
+            alert('Failed to add item to cart.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function openCartPopup() {
-    console.log('Opening Cart Popup');
-    const cartPopup = document.getElementById('cartPopup');
-    if (cartPopup) {
-        cartPopup.style.display = 'block'; // Make it visible
-    }
+// Call this function on page load to initialize the cart count
+document.addEventListener('DOMContentLoaded', updateCartCount);
+
+//JS cart model
+
+function openCart() {
+    fetch('/cart/items', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const cartItemsList = document.getElementById('cartItems');
+        cartItemsList.innerHTML = ''; // Clear existing items
+        data.items.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.item_name} (RM ${item.item_price}) x ${item.quantity}`;
+            cartItemsList.appendChild(listItem);
+        });
+        document.getElementById('cartModal').style.display = 'block';
+    })
+    .catch(error => console.error('Error:', error));
 }
 
-function closeCartPopup() {
-    console.log('Closing Cart Popup');
-    const cartPopup = document.getElementById('cartPopup');
-    if (cartPopup) {
-        cartPopup.style.display = 'none'; // Hide the popup
-    }
+function closeCart() {
+    document.getElementById('cartModal').style.display = 'none';
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const cartToggleButton = document.getElementById("cartToggleButton");
-  const cartPopup = document.getElementById("cartPopup");
-  const closeCartPopup = document.getElementById("closeCartPopup");
 
-  if (cartToggleButton && cartPopup && closeCartPopup) {
-    // Show the cart popup when the button is clicked
-    cartToggleButton.addEventListener("click", () => {
-      cartPopup.style.display = "flex";
-      console.log("Cart popup opened");
-    });
+document.getElementById('cartToggleButton').addEventListener('click', openCart);
 
-    // Hide the cart popup when the close button is clicked
-    closeCartPopup.addEventListener("click", () => {
-      cartPopup.style.display = "none";
-      console.log("Cart popup closed");
-    });
+//Remove Cart
 
-    // Hide the cart popup when clicking outside of it
-    window.addEventListener("click", (event) => {
-      if (event.target === cartPopup) {
-        cartPopup.style.display = "none";
-        console.log("Cart popup closed by clicking outside");
-      }
-    });
-  } else {
-    console.error("Required elements not found in the DOM");
-  }
+data.items.forEach(item => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${item.item_name} (RM ${item.item_price}) x ${item.quantity}`;
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    removeButton.onclick = () => removeFromCart(item.id);
+    listItem.appendChild(removeButton);
+
+    cartItemsList.appendChild(listItem);
 });
+
+// Remove pt 2
+
+function removeFromCart(cartItemId) {
+    fetch(`/cart/remove/${cartItemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item removed from cart!');
+            updateCartCount();
+            openCart(); // Refresh the cart modal
+        } else {
+            alert('Failed to remove item.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const cartButton = document.getElementById("cartToggleButton");
+    const cartItemsContainer = document.getElementById("cartItemsContainer");
+
+    // Function to fetch and render cart items
+    function fetchCartItems() {
+        fetch("/cart/items")
+            .then(response => response.json())
+            .then(data => {
+                cartItemsContainer.innerHTML = ""; // Clear existing items
+                data.forEach(item => {
+                    const itemDiv = document.createElement("div");
+                    itemDiv.innerHTML = `
+                        <div class="cart-item">
+                            <span>${item.item_name} - RM${item.item_price}</span>
+                            <button class="delete-button" data-id="${item.id}">Delete</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemDiv);
+                });
+
+                // Add event listeners for delete buttons
+                document.querySelectorAll(".delete-button").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const itemId = this.getAttribute("data-id");
+                        deleteCartItem(itemId);
+                    });
+                });
+            });
+    }
+
+    // Function to delete a cart item
+    function deleteCartItem(itemId) {
+        fetch(`/cart/delete/${itemId}`, {
+            method: "DELETE",
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    fetchCartItems(); // Refresh cart items
+                    updateCartCount(); // Update cart count
+                }
+            });
+    }
+
+    // Fetch cart items when the cart button is clicked
+    cartButton.addEventListener("click", fetchCartItems);
+});
+
 
     </script>
   </head>
+
+  
   <body>
+    <div id="cartItemsContainer">
+      <button id="cartToggleButton" class="cart-button">
+        Cart <span id="cartCount">0</span>
+    </button>
+  </div>
     
     <div class="main-container">
-      
       <div class="rectangle">
-        
         <div class="flex-row-bb">
           <img class="logo" src="img/duwa1.png" alt="Logo" />
           @if (Auth::check())
@@ -172,12 +292,14 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="aec-cfb-e-bf-aeeec"></div>
           <img class="chicken-pesto-pizza" src="/img/margherita.png" />
           <div class="flex-column">
-            <span class="classic-margherita">Classic Margherita</span>
+            <span class="classic-margherita">Margherita Pizza</span>
             <span class="fresh-marinara"
               >Made with fresh marinara sauce, mozzarella cheese, and
               basil</span
-            ><span class="price">RM 20.00</span
-            ><button class="rectangle-4"><span class="add">Add</span></button>
+            ><span class="price">RM 25.00</span
+            ><button class="rectangle-4" onclick="addToCart(1, 'Margherita', 25.00)">
+              <span class="add">Add</span>
+            </button>
           </div>
         </div>
         <div class="rectangle-5">
@@ -188,8 +310,10 @@ document.addEventListener("DOMContentLoaded", () => {
             ><span class="meat-mania"
               >Our Meat Mania Pizza comes fully loaded with pepperoni, bacon
               crumble, & mild sausage.</span
-            ><span class="price-6">RM 50.00</span
-            ><button class="rectangle-7"><span class="add-8">Add</span></button>
+            ><span class="price-6">RM 40.00</span
+            ><button class="rectangle-7">
+              <span class="add-8">Add</span>
+          </button>
           </div>
         </div>
       </div>
@@ -482,68 +606,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     </div>
+  </div>
     <!--Popup-->
-    <div id="cartPopup" class="cart-popup">
-      <div class="cart-content">
-          <!-- Close Button -->
-          <span class="close-button" onclick="closeCartPopup()">&times;</span>
-          
-          <!-- Header -->
-          <h2>Your Order</h2>
-          
-          <!-- Cart Items -->
-          <div id="cartItems" class="cart-items">
-              <!-- Dynamically added items will appear here -->
-          </div>
-          
-          <!-- Footer -->
-          <div class="cart-footer">
-              <!-- Total Price -->
-              <div class="cart-total">
-                  <strong>Total:</strong> <span id="cartTotal">RM 0.00</span>
-              </div>
-              
-              <!-- Checkout Button -->
-              <button class="checkout-button">Checkout</button>
-          </div>
-      </div>
-  </div>
-  <button id="cartToggleButton">Open Cart</button>
-  <div class="cart-popup" id="cartPopup">
-    <div class="cart-content">
-      <span class="close-button" id="closeCartPopup">&times;</span>
-      <h2>Your Cart</h2>
-      <p>No items in the cart.</p>
-      <div class="cart-footer">
-        <span class="cart-total">Total: RM0</span>
-        <button class="checkout-button">Checkout</button>
-      </div>
-    </div>
-  </div>
-  <div class="menu-item">
-    <h3>Example Menu Item</h3>
-    <p>Price: RM 12.00</p>
-    <button 
-        onclick="addToCart(1, 20.00)" 
-        class="add-to-cart-button"
-    >
-        Add to Cart
-    </button>
-    <button onclick="testFunction()">Test JavaScript</button>
-
-<script>
-    function testFunction() {
-        alert('JavaScript is working!');
-    }
-    document.querySelectorAll('button').forEach(button => {
-    console.log(button.getAttribute('onclick'));
-});
-</script>
-<div class="menu-item" data-name="Pizza Margherita" data-price="12.50">
-  <span class="menu-item-name">Pizza Margherita</span>
-  <span class="menu-item-price">RM 12.50</span>
-  <button class="add-to-cart" onclick="console.log('Button clicked', 'Pizza Margherita', 12.50); addToCart('Pizza Margherita', 12.50)">Add</button>
-</div>
-</div>
+    
   </body>
 </html>
