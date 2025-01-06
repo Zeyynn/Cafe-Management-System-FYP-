@@ -61,12 +61,6 @@ class CartController extends Controller
 
     return response()->json(['success' => false, 'message' => 'Item not found.']);
 }
-public function showPaymentPage() {
-    $userId = auth()->id(); // Replace with the actual user ID
-    $cartItems = DB::table('cart')->where('user_id', $userId)->get();
-
-    return view('ManagePayment.PaymentPage', compact('cartItems'));
-}
 }
 
 Log::info('Add to cart request payload:', $request->all());

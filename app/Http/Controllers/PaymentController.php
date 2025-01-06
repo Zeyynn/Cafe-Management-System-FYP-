@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 use Stripe\Charge;
 
@@ -17,15 +18,15 @@ class PaymentController extends Controller
 
             // Create a Charge
             $charge = Charge::create([
-                'amount' => $request->input('amount') * 100, // Convert to cents
-                'currency' => 'myr', // Adjust currency if needed
-                'source' => $request->input('stripeToken'),
+                'amount' => $request->input('totalAmount') * 100, // Convert to cents
+                'currency' => 'myr',
+                'source' => $request->input('stripeToken'), // Ensure stripeToken is passed
                 'description' => 'Payment for Order',
             ]);
 
             // Save order to database
             $userId = auth()->id();
-            $totalAmount = $request->input('amount');
+            $totalAmount = $request->input('totalAmount');
 
             $orderId = DB::table('orders')->insertGetId([
                 'user_id' => $userId,
@@ -36,10 +37,14 @@ class PaymentController extends Controller
 
             // Redirect to payment completed page with order ID
             return redirect()->route('payment.completed', ['orderId' => $orderId]);
-        } catch (\Exception $e) {
-            // Handle errors
-            return back()->withErrors(['error' => $e->getMessage()]);
+    } catch (\Exception $e) {
+        // Handle errors
+        return back()->withErrors(['error' => $e->getMessage()]);
         }
+        Log::info('Process Checkout Request:', $request->all());
+        Log::info('Order ID:', ['orderId' => $orderId ?? 'No Order ID']);
+        Log::info('Processing checkout', ['orderId' => $orderId]);
+
     }
 
     public function showPaymentPage()
@@ -52,9 +57,10 @@ class PaymentController extends Controller
         return view('Manage Payment.PaymentPage', compact('cartItems', 'totalAmount'));
     }
 
-    public function showPaymentCompleted(Request $request)
+    public function showPaymentCompleted($orderId)
     {
-        $userId = auth()->id(); // Get the currently authenticated user's ID
+        $userId = auth()->id();
+        $order = DB::table('orders')->where('id', $orderId)->first();
         $cartItems = DB::table('cart')->where('user_id', $userId)->get();
 
         $subtotal = $cartItems->sum(function ($item) {
@@ -65,13 +71,35 @@ class PaymentController extends Controller
         $deliveryFee = 10; // Example delivery fee
         $total = $subtotal + $taxes + $deliveryFee;
 
-        // Pass order ID to the view
-        $orderId = $request->query('orderId'); // Retrieve the order ID from the URL
-
-        // Clear cart items after successful payment
-        DB::table('cart')->where('user_id', $userId)->delete();
-
         // Pass data to the view
         return view('Manage Payment.PaymentCompletedPage', compact('cartItems', 'subtotal', 'taxes', 'deliveryFee', 'total', 'orderId'));
+    }
+
+    public function createCheckoutSession(Request $request)
+    {
+        try {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            $session = \Stripe\Checkout\Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'myr',
+                        'product_data' => [
+                            'name' => 'Order Total',
+                        ],
+                        'unit_amount' => $request->input('amount'), // Amount in cents
+                    ],
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => url('/payment-completed/{CHECKOUT_SESSION_ID}'),
+                'cancel_url' => url('/payment'),
+            ]);
+
+            return response()->json(['id' => $session->id]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

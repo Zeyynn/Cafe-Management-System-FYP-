@@ -94,7 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment.page');
     Route::post('/process-checkout', [PaymentController::class, 'processCheckout'])->name('process-checkout');
     Route::get('/payment-completed/{orderId}', [PaymentController::class, 'showPaymentCompleted'])->name('payment.completed');
-
+    Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('create-checkout-session');
 
 });
 
