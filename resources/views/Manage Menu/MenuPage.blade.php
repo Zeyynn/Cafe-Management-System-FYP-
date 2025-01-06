@@ -12,6 +12,8 @@
     @vite('resources/css/MenuPage.css')
     @vite('resources/js/cart.js')
     <script>
+
+      //Scroll
       document.querySelectorAll('.flex-row-c a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -24,223 +26,156 @@
         });
     });
 });
-function openForm() {
-  document.getElementById("signin").style.display = "block";
-}
 
-function closeForm() {
-  document.getElementById("signin").style.display = "none";
-}
 
 //Cart
-
-function addToCart(userId, itemName, itemPrice) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    fetch('/cart/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({
-            user_id: userId,
-            item_name: itemName,
-            item_price: itemPrice,
-            quantity: 1 // Default quantity
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item added to cart!');
-        } else {
-            alert('Failed to add item to cart.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// JS COUNTER
-
-function updateCartCount() {
-    fetch('/cart/count', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('cartCount').innerText = data.count || 0;
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-function addToCart(userId, itemName, itemPrice) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    fetch('/cart/add', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({
-            user_id: userId,
-            item_name: itemName,
-            item_price: itemPrice,
-            quantity: 1 // Default quantity
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item added to cart!');
-            updateCartCount(); // Update the cart count
-        } else {
-            alert('Failed to add item to cart.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Call this function on page load to initialize the cart count
-document.addEventListener('DOMContentLoaded', updateCartCount);
-
-//JS cart model
-
-function openCart() {
-    fetch('/cart/items', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const cartItemsList = document.getElementById('cartItems');
-        cartItemsList.innerHTML = ''; // Clear existing items
-        data.items.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${item.item_name} (RM ${item.item_price}) x ${item.quantity}`;
-            cartItemsList.appendChild(listItem);
-        });
-        document.getElementById('cartModal').style.display = 'block';
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-function closeCart() {
-    document.getElementById('cartModal').style.display = 'none';
-}
-
-
-document.getElementById('cartToggleButton').addEventListener('click', openCart);
-
-//Remove Cart
-
-data.items.forEach(item => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${item.item_name} (RM ${item.item_price}) x ${item.quantity}`;
-
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
-    removeButton.onclick = () => removeFromCart(item.id);
-    listItem.appendChild(removeButton);
-
-    cartItemsList.appendChild(listItem);
-});
-
-// Remove pt 2
-
-function removeFromCart(cartItemId) {
-    fetch(`/cart/remove/${cartItemId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item removed from cart!');
-            updateCartCount();
-            openCart(); // Refresh the cart modal
-        } else {
-            alert('Failed to remove item.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-    const cartButton = document.getElementById("cartToggleButton");
-    const cartItemsContainer = document.getElementById("cartItemsContainer");
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    // Function to fetch and render cart items
-    function fetchCartItems() {
-        fetch("/cart/items")
-            .then(response => response.json())
-            .then(data => {
-                cartItemsContainer.innerHTML = ""; // Clear existing items
-                data.forEach(item => {
-                    const itemDiv = document.createElement("div");
-                    itemDiv.innerHTML = `
-                        <div class="cart-item">
-                            <span>${item.item_name} - RM${item.item_price}</span>
-                            <button class="delete-button" data-id="${item.id}">Delete</button>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(itemDiv);
-                });
+    // Attach click event listeners to all "Add" buttons dynamically
+    document.querySelectorAll('.rectangle-4').forEach(button => {
+        button.addEventListener('click', function () {
+            const parentElement = this.closest('.main-container'); // Find the parent container of the button
 
-                // Add event listeners for delete buttons
-                document.querySelectorAll(".delete-button").forEach(button => {
-                    button.addEventListener("click", function () {
-                        const itemId = this.getAttribute("data-id");
-                        deleteCartItem(itemId);
-                    });
-                });
-            });
-    }
-
-    // Function to delete a cart item
-    function deleteCartItem(itemId) {
-        fetch(`/cart/delete/${itemId}`, {
-            method: "DELETE",
-            headers: {
-                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            if (!parentElement) {
+                console.error("Parent element for button not found.");
+                return;
             }
+
+            // Dynamically extract item name and price
+            const itemName = parentElement.querySelector('span:first-child').innerText.trim(); // First span inside the parentElement (item name)
+            const priceElement = parentElement.querySelector('.price'); // Find price element inside the parent
+            const itemPrice = parseFloat(priceElement.innerText.replace('RM ', '').trim()); // Extract price dynamically
+
+            const userId = 1; // Replace with dynamic user ID if necessary
+
+            // Call the addToCart function with the extracted data
+            addToCart(userId, itemName, itemPrice);
+        });
+    });
+
+    // Add to Cart Function
+    function addToCart(userId, itemName, itemPrice) {
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify({
+                user_id: userId,
+                item_name: itemName,
+                item_price: itemPrice,
+                quantity: 1, // Default quantity
+            }),
         })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    fetchCartItems(); // Refresh cart items
-                    updateCartCount(); // Update cart count
+                    alert(`${itemName} added to cart!`);
+                } else {
+                    alert(`Failed to add ${itemName} to cart.`);
                 }
-            });
+            })
+            .catch(error => console.error('Error adding to cart:', error));
     }
-
-    // Fetch cart items when the cart button is clicked
-    cartButton.addEventListener("click", fetchCartItems);
 });
 
+//Popup
+document.addEventListener('DOMContentLoaded', function () {
+    const orderButton = document.getElementById('orderButtonLink');
+    const cartPopup = document.getElementById('cartPopup');
+    const closeCartButton = document.getElementById('closeCartButton');
+    const cartItemsList = document.getElementById('cartItemsList');
+
+    // Function to fetch cart items
+    function fetchCartItems() {
+        fetch('/cart/items', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Clear previous items
+            cartItemsList.innerHTML = '';
+            if (!data.items || data.items.length === 0) {
+                cartItemsList.innerHTML = '<li>Your cart is empty</li>';
+            } else {
+                data.items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        ${item.item_name} - RM${item.item_price} x ${item.quantity};
+                        <button class="remove-button" data-id="${item.id}">Remove</button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                });
+
+                // Attach event listeners to remove buttons
+                document.querySelectorAll('.remove-button').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const itemId = this.getAttribute('data-id');
+                        if (!itemId) {
+                            console.error("Item ID is undefined.");
+                            return;
+                        }
+                        console.log("Item ID:", itemId);
+                        removeCartItem(itemId);
+                    });
+                });
+            }
+            cartPopup.style.display = 'block'; // Show the popup
+        })
+        .catch(error => console.error('Error fetching cart items:', error));
+    }
+
+    // Function to remove a cart item
+    function removeCartItem(cartItemId) {
+    fetch(`/cart/remove/${cartItemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item removed from cart.');
+            fetchCartItems(); // Refresh cart items
+        } else {
+            alert('Failed to remove item.');
+        }
+    })
+    .catch(error => console.error('Error removing cart item:', error));
+}
+
+    // Open cart popup when "Order" is clicked
+    orderButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        fetchCartItems();
+    });
+
+    // Close cart popup when "Close" is clicked
+    closeCartButton.addEventListener('click', function () {
+        cartPopup.style.display = 'none';
+    });
+
+    // Close popup when clicking outside the cart content
+    window.addEventListener('click', function (e) {
+        if (e.target === cartPopup) {
+            cartPopup.style.display = 'none';
+        }
+    });
+});
 
     </script>
   </head>
 
   
   <body>
-    <div id="cartItemsContainer">
-      <button id="cartToggleButton" class="cart-button">
-        Cart <span id="cartCount">0</span>
-    </button>
-  </div>
-    
     <div class="main-container">
       <div class="rectangle">
         <div class="flex-row-bb">
@@ -256,8 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
         @endif
           <div class="removal"></div>
             <span class="rectangle-1"></span>
-            <button id="cartToggleButton" class="cart-button">Cart</button>
-            <span class="order">Order</span>
+            <a href="#" id="orderButtonLink" class="order-link">
+              <span id="orderButton" class="order">Order</span>
+          </a>
           <a href="{{ route('stores') }}" class="stores-link">
             <span class="stores">Stores</span>
           </a>
@@ -276,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <a href="#sourdough-pizza" class="sourdough-pizza">| Sourdough Pizza</a>
           <a href="#pasta" class="pasta">| Pasta</a>
           <a href="#soup" class="soup">| Soup</a>
-          <a href="#toast" class="toast">| Toast</a>
           <a href="#dessert" class="dessert">| Dessert</a>
           <a href="#et-cetera" class="et-cetera">| Et Cetera</a>
           <a href="#drink" class="drink">| Drink</a>
@@ -311,9 +246,9 @@ document.addEventListener("DOMContentLoaded", function () {
               >Our Meat Mania Pizza comes fully loaded with pepperoni, bacon
               crumble, & mild sausage.</span
             ><span class="price-6">RM 40.00</span
-            ><button class="rectangle-7">
-              <span class="add-8">Add</span>
-          </button>
+            ><button class="rectangle-4" onclick="addToCart(1, 'Margherita', 25.00)">
+              <span class="add">Add</span>
+            </button>
           </div>
         </div>
       </div>
@@ -327,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
               >This Creamy Pesto Chicken Pizza has a delicious thin crust and
               juicy sun dried tomatoes.</span
             ><span class="price-b">RM 35.00</span
-            ><button class="rectangle-c"><span class="add-d">Add</span></button>
+            ><button class="rectangle-4"><span class="add-d">Add</span></button>
           </div>
         </div>
         <div class="rectangle-e">
@@ -483,9 +418,9 @@ document.addEventListener("DOMContentLoaded", function () {
             ><span class="price-51">RM 25.00</span>
           </div>
           <div class="flex-row-ed">
-            <div class="rectangle-52"></div>
-              <span class="add-button">Add</span>
-            </button>
+            <button class="rectangle-4" onclick="addToCart(1, 'Meat Madness', 50.00)">
+              <span class="add">Add</span>
+          </button>
           </div>
         </div>
         <div class="rectangle-54">
@@ -607,7 +542,15 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
   </div>
+  <div id="cartPopup" class="cart-popup" style="display: none;">
+    <div class="cart-popup-content">
+        <h2>Your Cart</h2>
+        <ul id="cartItemsList"></ul>
+        <a href="/payment" id="checkoutButton" class="checkout-button">Checkout</a>
+        <button id="closeCartButton">Close</button>
+    </div>
+</div>
     <!--Popup-->
-    
   </body>
+  
 </html>

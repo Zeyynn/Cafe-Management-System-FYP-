@@ -25,42 +25,40 @@ class CartController extends Controller
 
         return response()->json(['success' => true, 'cart' => $cart]);
     }
-    public function cartCount(Request $request)
-{
-    $userId = auth()->id();
-    $count = Cart::where('user_id', $userId)->sum('quantity');
-    return response()->json(['count' => $count]);
-}
+    
 public function cartItems(Request $request)
 {
     $userId = auth()->id();
-    $items = Cart::where('user_id', $userId)->get(['item_name', 'item_price', 'quantity']);
+    $items = Cart::where('user_id', $userId)->get(['id', 'item_name', 'item_price', 'quantity']);
     return response()->json(['items' => $items]);
 }
 
-public function removeFromCart($id)
+public function removeItem($id)
 {
-    $item = Cart::findOrFail($id);
-    $item->delete();
-    return response()->json(['success' => true]);
+    $cartItem = Cart::find($id);
+
+    if ($cartItem) {
+        $cartItem->delete();
+        return response()->json(['success' => true, 'message' => 'Item removed from cart.']);
+    }
+\Log::error("Cart item with ID $id not found.");
+    return response()->json(['success' => false, 'message' => 'Item not found.']);
 }
 public function getCartItems()
 {
-    $userId = Auth::id(); // Get the logged-in user ID
-    $cartItems = DB::table('cart')->where('user_id', $userId)->get();
-    return response()->json($cartItems);
-}
+    try {
+        $cartItems = Cart::where('user_id', auth()->id())->get();
 
-public function deleteCartItem($id)
-{
-    $userId = Auth::id(); // Get the logged-in user ID
-    $deleted = DB::table('cart')->where('id', $id)->where('user_id', $userId)->delete();
-
-    if ($deleted) {
-        return response()->json(['success' => true]);
-    } else {
-        return response()->json(['success' => false], 400);
+        return response()->json(['items' => $cartItems]);
+    } catch (\Exception $e) {
+        \Log::error('Error fetching cart items: ' . $e->getMessage());
+        return response()->json(['error' => 'Failed to fetch cart items'], 500);
     }
+    
+    $userId = auth()->id(); // Get the authenticated user's ID
+    $cartItems = Cart::where('user_id', auth()->id())->get();
+
+    return response()->json($cartItems);
 }
 
 }

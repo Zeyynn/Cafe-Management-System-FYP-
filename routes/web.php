@@ -80,10 +80,10 @@ Route::middleware('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('/cart/add', [CartController::class, 'addToCart']);
         Route::get('/cart/count', [CartController::class, 'cartCount']);
-        Route::get('/cart/items', [CartController::class, 'cartItems']);
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart']);
-        Route::get('/cart/items', [CartController::class, 'getCartItems']);
         Route::delete('/cart/delete/{id}', [CartController::class, 'deleteCartItem']);
+        Route::get('/cart/items', [CartController::class, 'cartItems'])->name('cart.items');
+        Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem']);
     });
 
     //Menu
