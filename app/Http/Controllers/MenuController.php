@@ -12,6 +12,6 @@ class MenuController extends Controller
     {
         // Fetch menu items from the database
         $menuItems = DB::table('menu')->get();
-        return view('Manage Menu.MenuPage', compact('menuItems'));
+        return view('Manage Menu.MenuPage', ['menuItems' => $menuItems]);
     }
 }

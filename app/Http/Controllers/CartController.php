@@ -16,16 +16,21 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cart = Cart::create([
-            'user_id' => $validated['user_id'],
-            'item_name' => $validated['item_name'],
-            'item_price' => $validated['item_price'],
-            'quantity' => $validated['quantity'],
-        ]);
+        $cartItem = Cart::where('user_id', $validated['user_id'])
+        ->where('item_name', $validated['item_name'])
+        ->first();
 
-        return response()->json(['success' => true, 'cart' => $cart]);
+    if ($cartItem) {
+        // If item exists, update the quantity
+        $cartItem->quantity += $validated['quantity'];
+        $cartItem->save();
+    } else {
+        // If item doesn't exist, create a new cart item
+        Cart::create($validated);
     }
-    
+
+    return response()->json(['success' => true]);
+}
 public function cartItems(Request $request)
 {
     $userId = auth()->id();
@@ -46,17 +51,22 @@ public function removeItem($id)
 }
 public function getCartItems()
 {
+
+    $userId = auth()->id(); // Get the authenticated user's ID
+    $cartItems = Cart::where('user_id', $userId)
+        ->select('id', 'item_name', 'item_price', 'quantity')
+        ->get();
+
     try {
         $cartItems = Cart::where('user_id', auth()->id())->get();
 
-        return response()->json(['items' => $cartItems]);
+        return response()->json(['items' => $cartItems]);;
     } catch (\Exception $e) {
         \Log::error('Error fetching cart items: ' . $e->getMessage());
         return response()->json(['error' => 'Failed to fetch cart items'], 500);
     }
     
-    $userId = auth()->id(); // Get the authenticated user's ID
-    $cartItems = Cart::where('user_id', auth()->id())->get();
+    
 
     return response()->json($cartItems);
 }

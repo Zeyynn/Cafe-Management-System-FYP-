@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const priceElement = parentElement.querySelector('.price'); // Find price element inside the parent
             const itemPrice = parseFloat(priceElement.innerText.replace('RM ', '').trim()); // Extract price dynamically
 
-            const userId = 1; // Replace with dynamic user ID if necessary
+            const userId = {{ auth()->id() }}; // Replace with dynamic user ID if necessary
 
             // Call the addToCart function with the extracted data
             addToCart(userId, itemName, itemPrice);
@@ -87,70 +87,93 @@ document.addEventListener('DOMContentLoaded', function () {
     const cartPopup = document.getElementById('cartPopup');
     const closeCartButton = document.getElementById('closeCartButton');
     const cartItemsList = document.getElementById('cartItemsList');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    if (!orderButton || !cartPopup || !cartItemsList || !closeCartButton) {
+        console.error("Some required elements are missing in the DOM.");
+        return;
+    }
 
     // Function to fetch cart items
     function fetchCartItems() {
+        console.log("Fetching cart items...");
         fetch('/cart/items', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                'X-CSRF-TOKEN': csrfToken
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            // Clear previous items
-            cartItemsList.innerHTML = '';
-            if (!data.items || data.items.length === 0) {
-                cartItemsList.innerHTML = '<li>Your cart is empty</li>';
-            } else {
-                data.items.forEach(item => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        ${item.item_name} - RM${item.item_price} x ${item.quantity};
-                        <button class="remove-button" data-id="${item.id}">Remove</button>
-                    `;
-                    cartItemsList.appendChild(listItem);
-                });
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to fetch cart items:', response.statusText);
+                    return response.json();
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Cart items fetched:", data);
 
-                // Attach event listeners to remove buttons
-                document.querySelectorAll('.remove-button').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const itemId = this.getAttribute('data-id');
-                        if (!itemId) {
-                            console.error("Item ID is undefined.");
-                            return;
-                        }
-                        console.log("Item ID:", itemId);
-                        removeCartItem(itemId);
+                // Clear previous items
+                cartItemsList.innerHTML = '';
+                if (!data.items || data.items.length === 0) {
+                    cartItemsList.innerHTML = '<li>Your cart is empty</li>';
+                } else {
+                    data.items.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            ${item.item_name} - RM${item.item_price} x ${item.quantity};
+                            <button class="remove-button" data-id="${item.id}">Remove</button>
+                        `;
+                        cartItemsList.appendChild(listItem);
                     });
-                });
-            }
-            cartPopup.style.display = 'block'; // Show the popup
-        })
-        .catch(error => console.error('Error fetching cart items:', error));
+
+                    // Attach event listeners to remove buttons
+                    document.querySelectorAll('.remove-button').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const itemId = this.getAttribute('data-id');
+                            if (!itemId) {
+                                console.error("Item ID is undefined.");
+                                return;
+                            }
+                            console.log("Removing item with ID:", itemId);
+                            removeCartItem(itemId);
+                        });
+                    });
+                }
+                cartPopup.style.display = 'block'; // Show the popup
+            })
+            .catch(error => console.error('Error fetching cart items:', error));
     }
 
     // Function to remove a cart item
     function removeCartItem(cartItemId) {
-    fetch(`/cart/remove/${cartItemId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Item removed from cart.');
-            fetchCartItems(); // Refresh cart items
-        } else {
-            alert('Failed to remove item.');
-        }
-    })
-    .catch(error => console.error('Error removing cart item:', error));
-}
+        console.log("Sending request to remove item:", cartItemId);
+        fetch(`/cart/remove/${cartItemId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to remove cart item:', response.statusText);
+                    return response.json();
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Remove item response:", data);
+                if (data.success) {
+                    alert('Item removed from cart.');
+                    fetchCartItems(); // Refresh cart items
+                } else {
+                    alert('Failed to remove item.');
+                }
+            })
+            .catch(error => console.error('Error removing cart item:', error));
+    }
 
     // Open cart popup when "Order" is clicked
     orderButton.addEventListener('click', function (e) {
@@ -170,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
 
     </script>
   </head>
@@ -232,12 +256,12 @@ document.addEventListener('DOMContentLoaded', function () {
               >Made with fresh marinara sauce, mozzarella cheese, and
               basil</span
             ><span class="price">RM 25.00</span
-            ><button class="rectangle-4" onclick="addToCart(1, 'Margherita', 25.00)">
-              <span class="add">Add</span>
-            </button>
+            ><button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', 'Margherita', 25.00)">
+              Add
+          </button>
           </div>
         </div>
-        <div class="rectangle-5">
+        <div class="rectangle-3">
           <div class="barbecue-bacon-pizza"></div>
           <img class="chicken-pesto-pizza" src="/img/meatmadness.png" />
           <div class="flex-column-ba">
@@ -246,9 +270,9 @@ document.addEventListener('DOMContentLoaded', function () {
               >Our Meat Mania Pizza comes fully loaded with pepperoni, bacon
               crumble, & mild sausage.</span
             ><span class="price-6">RM 40.00</span
-            ><button class="rectangle-4" onclick="addToCart(1, 'Margherita', 25.00)">
-              <span class="add">Add</span>
-            </button>
+            ><button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', 'Madness', .00)">
+              Add
+          </button>
           </div>
         </div>
       </div>
@@ -550,7 +574,35 @@ document.addEventListener('DOMContentLoaded', function () {
         <button id="closeCartButton">Close</button>
     </div>
 </div>
-    <!--Popup-->
+
+    <!--Test-->
+    @php
+    $groupedMenuItems = $menuItems->groupBy('category');
+@endphp
+
+@foreach ($groupedMenuItems as $category => $items)
+    <h2>{{ $category }}</h2> <!-- Category Header -->
+
+    @foreach ($items->chunk(2) as $menuRow)
+        <div class="flex-row">
+            @foreach ($menuRow as $item)
+                <div class="rectangle-3">
+                    <div class="barbecue-bacon-pizza"></div>
+                    <img src="/img/{{ strtolower(str_replace(' ', '-', $item->name)) }}.png" alt="{{ $item->name }}">
+                    <div class="flex-column">
+                        <span class="meat-madness">{{ $item->name }}</span>
+                        <span class="meat-mania">{{ $item->description }}</span>
+                        <span class="price-6">RM {{ number_format($item->price, 2) }}</span>
+                        <button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', '{{ $item->name }}', {{ $item->price }})">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+@endforeach
+
   </body>
   
 </html>

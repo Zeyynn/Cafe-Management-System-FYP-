@@ -320,6 +320,8 @@
     margin-top: 0;
   }
   .rectangle-3 {
+    margin: 20px;
+    padding: 10px;
     flex-shrink: 0;
     position: relative;
     width: 548px;
