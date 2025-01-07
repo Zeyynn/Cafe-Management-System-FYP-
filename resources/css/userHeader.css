@@ -1,0 +1,155 @@
+:root {
+    --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
+      "Source Han Sans CN", sans-serif;
+  }
+
+.main-container {
+    overflow: hidden;
+  }
+
+  .main-container,
+  .main-container * {
+    box-sizing: border-box;
+  }
+
+  .main-container {
+    position: relative;
+    width: 1440px;
+    height: 3355px;
+    margin: 0 auto;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .rectangle {
+    position: relative;
+    width: 1440px;
+    height: 256px;
+    margin: 0 0 0 0;
+    background: #f4f5ff;
+    overflow: visible auto;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .flex-row-bb {
+    position: relative;
+    width: 1214.127px;
+    height: 110px;
+    margin: 42px 0 0 100px;
+    z-index: 15;
+  }
+  .removal {
+    position: absolute;
+    width: 201px;
+    height: 110px;
+    top: 0;
+    left: 0;
+    background: url(./assets/images/3384425fe9b81c4fb27576b225d2a40bf8fe4877.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 15;
+  }
+  .rectangle-1 {
+    position: absolute;
+    width: 116.858px;
+    height: 45.429px;
+    top: 5px;
+    left: 1062px;
+    cursor: pointer;
+    background: #353a66;
+    border: none;
+    z-index: 2;
+    border-radius: 113px;
+  }
+  .stores {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 16px;
+    left: 809px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 5;
+  }
+  
+  .artboard {
+    position: absolute;
+    width: 26px;
+    height: 24px;
+    top: 16px;
+    left: 899px;
+    background: url(./assets/images/f226a5f894dd05e61e788b9bbca38a5e2aa640f0.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 7;
+  }
+  .sign-in {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24.878px;
+    top: 16px;
+    left: 1089px;
+    color: #ffffff;
+    font-family: Fira Sans, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 3;
+  }
+  .english {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: 24px;
+    top: 16px;
+    left: 932px;
+    color: #3f3d35;
+    font-family: Artifika, var(--default-font-family);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    white-space: nowrap;
+    z-index: 6;
+  }
+
+  .flex-row-c {
+    position: relative;
+    width: 1292px;
+    height: 29px;
+    margin: 51px 0 0 17px;
+    z-index: 29;
+  }
+  .toolbar-icon {
+    position: absolute;
+    width: 32px;
+    height: 21px;
+    top: 4px;
+    left: 0;
+    background: url(./assets/images/864f495f65b7a4005c73c6237ae6d74a05d6ea7b.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 29;
+  }
+  .line {
+    position: relative;
+    width: 227px;
+    height: 6px;
+    margin: 18px 0 0 128px;
+    background: url(./assets/images/9c6e887a-f2bb-43b9-a5f9-0315996586bb.png)
+      no-repeat center;
+    background-size: cover;
+    z-index: 16;
+  }

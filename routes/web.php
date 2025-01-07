@@ -13,6 +13,10 @@ use App\Http\Controllers\PaymentController;
 
 // Public Routes
 
+Route::get('/test', function () {
+    return view('include.userHeader');
+})->name('test');
+
 Route::get('/password', function () {
     return view('Manage User Profile.ChangePasswordPage');
 })->name('password');

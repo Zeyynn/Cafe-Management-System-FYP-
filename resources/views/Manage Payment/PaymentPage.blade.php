@@ -1,3 +1,4 @@
+@include('include.userHeader')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,6 @@
     </script>
 </head>
 <body>
-
   <div class="container">
     <!-- Order Summary -->
     <div class="order-summary">
@@ -70,36 +70,11 @@
             </tbody>
         </table>
         <p><strong>Total:</strong> RM{{ number_format($totalAmount, 2) }}</p>
-    </div>
-
-    <!-- Checkout Form -->
-    <div class="checkout-form">
-      <h2>Check Out</h2>
-      <form action="{{ route('process-checkout') }}" method="POST">
-        @csrf
-        <input type="hidden" name="totalAmount" value="{{ $totalAmount }}">
-        <div class="form-group">
-            <label for="card-holder-name">Card Holder Name</label>
-            <input type="text" id="card-holder-name" name="card_holder_name" placeholder="Your Name" required>
-        </div>
-        <div class="form-group">
-            <label for="card-number">Card Number</label>
-            <input type="text" id="card-number" name="card_number" placeholder="**** **** **** ****" required>
-        </div>
-        <div class="form-group">
-            <label for="expiration-date">Expiration Date</label>
-            <input type="text" id="expiration-date" name="expiration_date" placeholder="MM/YY" required>
-        </div>
-        <div class="form-group">
-            <label for="cvv">CVV Code</label>
-            <input type="text" id="cvv" name="cvv" placeholder="***" required>
-        </div>
         <button id="checkout-button" type="submit" class="btn btn-primary">
             Pay RM{{ number_format($totalAmount, 2) }}
         </button>
-    </form>
-      <p class="secure-info">Payments are secured and encrypted</p>
-  </div>
+        <p class="secure-info">Payments are secured and encrypted</p>
+    </div>
 </div>
 </div>
 </body>

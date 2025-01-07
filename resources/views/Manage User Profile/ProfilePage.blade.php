@@ -12,7 +12,9 @@
     <div class="main-container">
       <div class="rectangle">
         <div class="removal">
-          <img class="logo" src="img/duwa1.png" alt="Logo" />
+          <a href="/menu">
+            <img class="logo" src="img/duwa1.png" alt="Logo" />
+            </a>
         </div>
         <a href="#" class="english" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Log Out

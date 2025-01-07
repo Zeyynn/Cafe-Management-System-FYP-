@@ -1,3 +1,4 @@
+@include('include.userHeader')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +9,6 @@
     @vite('resources/css/PaymentCompleted.css')
 </head>
 <body>
-    <div class="header">
-        <div class="logo">
-            <h2>Duwa</h2>
-        </div>
-        <nav>
-            <a href="{{ route('home') }}">Order</a>
-            <a href="#">Stores</a>
-            <a href="#">English</a>
-            <a href="{{ route('login') }}">Sign In</a>
-        </nav>
-    </div>
 
     <div class="container">
         <h1>Thank you for purchasing with us!</h1>
