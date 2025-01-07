@@ -21,13 +21,11 @@ Route::get('/password', function () {
     return view('Manage User Profile.ChangePasswordPage');
 })->name('password');
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('Manage Menu.HomePage');
 })->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+
 
 Route::get('/login', function () {
     return view('Manage Login.LoginPage');
