@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/cart/delete/{id}', [CartController::class, 'deleteCartItem']);
         Route::get('/cart/items', [CartController::class, 'cartItems'])->name('cart.items');
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem']);
+        Route::post('/clear-cart', [PaymentController::class, 'clearCart'])->name('clear-cart');
     });
 
     //Menu

@@ -338,7 +338,9 @@ button {
         </div>
         <button class="rectangle-button"></button
         ><span class="profile">Profile</span>
-        <span class="text-3">Stores</span><span class="text-4">Order</span>
+        <a href="{{ route('stores') }}" class="stores-link">
+          <span class="text-3">Stores</span>
+        </a>
         <div class="pic"></div>
       </div>
       <div class="section">

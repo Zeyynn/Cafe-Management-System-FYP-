@@ -47,35 +47,31 @@
     </script>
 </head>
 <body>
-  <div class="container">
-    <!-- Order Summary -->
     <div class="order-summary">
-        <h2>Your Order</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($cartItems as $item)
-                    <tr>
-                        <td>{{ $item->item_name }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>RM{{ number_format($item->item_price, 2) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <p><strong>Total:</strong> RM{{ number_format($totalAmount, 2) }}</p>
-        <button id="checkout-button" type="submit" class="btn btn-primary">
-            Pay RM{{ number_format($totalAmount, 2) }}
-        </button>
-        <p class="secure-info">Payments are secured and encrypted</p>
+      <h2>Your Order</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($cartItems as $item)
+          <tr>
+            <td>{{ $item->item_name }}</td>
+            <td>{{ $item->quantity }}</td>
+            <td>RM{{ number_format($item->item_price, 2) }}</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+      <p class="total">Total: RM{{ number_format($totalAmount, 2) }}</p>
+      <button id="checkout-button" type="submit" class="btn">
+        Pay RM{{ number_format($totalAmount, 2) }}
+      </button>
+      <p class="secure-info">Payments are secured and encrypted</p>
     </div>
-</div>
-</div>
-</body>
+  </body>
 </html>

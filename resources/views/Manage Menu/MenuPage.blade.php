@@ -215,7 +215,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 <a href="{{ route('login') }}">Log in</a> to access the menu.
             </div>
         @endif
-          <div class="removal"></div>
+          <div class="removal">
+            <a href="/menu">
+                <img class="logo" src="img/duwa1.png" alt="Logo" />
+                </a>
+          </div>
             <span class="rectangle-1"></span>
             <a href="#" id="orderButtonLink" class="order-link">
               <span id="orderButton" class="order">Order</span>
@@ -240,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <a href="#soup" class="soup">| Soup</a>
           <a href="#dessert" class="dessert">| Dessert</a>
           <a href="#et-cetera" class="et-cetera">| Et Cetera</a>
-          <a href="#drink" class="drink">| Drink</a>
+          <a href="#drink" class="drink">| Drinks</a>
           <div class="toolbar-icon"></div>
         </div>
         <div class="line"></div>
@@ -249,12 +253,12 @@ document.addEventListener('DOMContentLoaded', function () {
 <!--Menu-->
 
 <div class="menu-container">      
-@php
+    @php
     $groupedMenuItems = $menuItems->groupBy('category');
 @endphp
 
 @foreach ($groupedMenuItems as $category => $items)
-    <h2>{{ $category }}</h2> <!-- Category Header -->
+    <h2 id="{{ strtolower(str_replace(' ', '-', $category)) }}">{{ $category }}</h2> <!-- Add IDs here -->
 
     @foreach ($items->chunk(2) as $menuRow)
         <div class="flex-row">
@@ -267,8 +271,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         <span class="meat-mania">{{ $item->description }}</span>
                         <span class="price-6">RM {{ number_format($item->price, 2) }}</span>
                         <button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', '{{ $item->name }}', {{ $item->price }})">
-                          Add
-                      </button>
+                            Add
+                        </button>
                     </div>
                 </div>
             @endforeach

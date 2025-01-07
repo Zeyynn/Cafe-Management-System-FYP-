@@ -22,8 +22,9 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
         </form>
-        <span class="stores">Stores</span>
-        <span class="order">Order</span>
+        <a href="{{ route('stores') }}" class="stores-link">
+          <span class="stores">Stores</span>
+        </a>
         <div class="artboard"></div>
         <span class="profile">Profile</span>
       </div>

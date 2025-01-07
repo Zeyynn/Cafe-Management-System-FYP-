@@ -28,20 +28,20 @@
                 </thead>
                 <tbody>
                     @foreach ($cartItems as $item)
-                        <tr>
-                            <td>{{ $item->item_name }}</td>
-                            <td>x{{ $item->quantity }}</td>
-                            <td>RM{{ number_format($item->item_price, 2) }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $item->item_name }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>RM{{ number_format($item->item_price, 2) }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
         
             <div class="receipt-total">
-                <p>Total: RM{{ number_format($subtotal, 2) }}</p>
-                <p>Taxes and Charges: RM{{ number_format($taxes, 2) }}</p>
-                <p>Delivery: RM{{ number_format($deliveryFee, 2) }}</p>
-                <p>Bill Total: <strong>RM{{ number_format($total, 2) }}</strong></p>
+                <p><strong>Total:</strong> RM{{ number_format($subtotal, 2) }}</p>
+                <p><strong>Taxes and Charges:</strong> RM{{ number_format($taxes, 2) }}</p>
+                <p><strong>Delivery:</strong> RM{{ number_format($deliveryFee, 2) }}</p>
+                <p><strong>Bill Total:</strong> RM{{ number_format($total, 2) }}</p>
             </div>
         </div>
         

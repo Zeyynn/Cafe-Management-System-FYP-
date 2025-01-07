@@ -37,14 +37,10 @@ class PaymentController extends Controller
 
             // Redirect to payment completed page with order ID
             return redirect()->route('payment.completed', ['orderId' => $orderId]);
-    } catch (\Exception $e) {
-        // Handle errors
-        return back()->withErrors(['error' => $e->getMessage()]);
+        } catch (\Exception $e) {
+            // Handle errors
+            return back()->withErrors(['error' => $e->getMessage()]);
         }
-        Log::info('Process Checkout Request:', $request->all());
-        Log::info('Order ID:', ['orderId' => $orderId ?? 'No Order ID']);
-        Log::info('Processing checkout', ['orderId' => $orderId]);
-
     }
 
     public function showPaymentPage()
@@ -60,19 +56,28 @@ class PaymentController extends Controller
     public function showPaymentCompleted($orderId)
     {
         $userId = auth()->id();
+        
+        // Fetch order details
         $order = DB::table('orders')->where('id', $orderId)->first();
+
+        // Fetch items to show on receipt
         $cartItems = DB::table('cart')->where('user_id', $userId)->get();
 
         $subtotal = $cartItems->sum(function ($item) {
             return $item->item_price * $item->quantity;
         });
 
-        $taxes = 15; // Example tax value
-        $deliveryFee = 10; // Example delivery fee
+        $taxes = 3; // Example tax value
+        $deliveryFee = 1; // Example delivery fee
         $total = $subtotal + $taxes + $deliveryFee;
 
         // Pass data to the view
-        return view('Manage Payment.PaymentCompletedPage', compact('cartItems', 'subtotal', 'taxes', 'deliveryFee', 'total', 'orderId'));
+        $receiptData = compact('cartItems', 'subtotal', 'taxes', 'deliveryFee', 'total', 'orderId');
+        
+        // Clear the cart after generating receipt data
+        $this->clearCart($userId);
+
+        return view('Manage Payment.PaymentCompletedPage', $receiptData);
     }
 
     public function createCheckoutSession(Request $request)
@@ -101,5 +106,12 @@ class PaymentController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+
+    // Function to clear the cart for a specific user
+    public function clearCart($userId)
+    {
+        DB::table('cart')->where('user_id', $userId)->delete();
     }
 }
