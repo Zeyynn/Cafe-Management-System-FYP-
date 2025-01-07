@@ -31,6 +31,7 @@ class CartController extends Controller
 
     return response()->json(['success' => true]);
 }
+
 public function cartItems(Request $request)
 {
     $userId = auth()->id();
