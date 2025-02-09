@@ -336,8 +336,8 @@ button {
             <img class="logo" src="img/duwa1.png" alt="Logo" />
             </a>
         </div>
-        <button class="rectangle-button"></button
-        ><span class="profile">Profile</span>
+        <button class="rectangle-button"></button>
+        <span class="profile">Profile</span>
         <a href="{{ route('stores') }}" class="stores-link">
           <span class="text-3">Stores</span>
         </a>

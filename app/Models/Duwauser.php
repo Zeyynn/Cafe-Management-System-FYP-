@@ -9,13 +9,13 @@ class Duwauser extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'duwauser'; // Specify the table name
+    protected $table = 'duwauser'; 
 
     protected $fillable = [
         'name', 
         'phone', 
         'email', 
-        'password', // Ensure password is included for authentication
+        'password', 
         'birthday', 
         'gender', 
         'address', 

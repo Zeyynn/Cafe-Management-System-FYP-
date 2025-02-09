@@ -11,7 +11,7 @@ class RegistrationController extends Controller
     public function store(Request $request)
 {
     try {
-        // Validate input data
+        //Input
         $validatedData = $request->validate([
             'username' => 'required|max:255',
             'phone' => 'required|max:15',
@@ -19,10 +19,10 @@ class RegistrationController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // Debug: Log validated data
+        
         \Log::info('Validated Data:', $validatedData);
 
-        // Save the data into the database
+        
         $user = RegistrationModel::create([
             'name' => $validatedData['username'],
             'phone' => $validatedData['phone'],

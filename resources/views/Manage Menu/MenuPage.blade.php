@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Attach click event listeners to all "Add" buttons dynamically
     document.querySelectorAll('.rectangle-4').forEach(button => {
         button.addEventListener('click', function () {
-            const parentElement = this.closest('.rectangle-3'); // Find the parent container of the button
+            const parentElement = this.closest('.rectangle-3'); 
 
             if (!parentElement) {
                 console.error("Parent element for button not found.");
@@ -254,32 +254,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <div class="menu-container">      
     @php
-    $groupedMenuItems = $menuItems->groupBy('category');
-@endphp
+        $groupedMenuItems = $menuItems->groupBy('category');
+    @endphp
 
-@foreach ($groupedMenuItems as $category => $items)
-    <h2 id="{{ strtolower(str_replace(' ', '-', $category)) }}">{{ $category }}</h2> <!-- Add IDs here -->
-
-    @foreach ($items->chunk(2) as $menuRow)
-        <div class="flex-row">
-            @foreach ($menuRow as $item)
-                <div class="rectangle-3">
-                    <div class="barbecue-bacon-pizza"></div>
-                    <img src="/img/{{ $item->image }}" alt="{{ $item->name }}">
-                    <div class="flex-column">
-                        <span class="meat-madness">{{ $item->name }}</span>
-                        <span class="meat-mania">{{ $item->description }}</span>
-                        <span class="price-6">RM {{ number_format($item->price, 2) }}</span>
-                        <button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', '{{ $item->name }}', {{ $item->price }})">
-                            Add
-                        </button>
-                    </div>
+    @foreach ($groupedMenuItems as $category => $items)
+        <h2 id="{{ strtolower(str_replace(' ', '-', $category)) }}">{{ $category }}</h2> 
+        
+        <!-- Category Container -->
+        <div class="category-container">
+            @foreach ($items->chunk(2) as $menuRow)
+                <div class="flex-row">
+                    @foreach ($menuRow as $item)
+                        <div class="rectangle-3">
+                            <div class="barbecue-bacon-pizza"></div>
+                            <img src="/img/{{ $item->image }}" alt="{{ $item->name }}">
+                            <div class="flex-column">
+                                <span class="meat-madness">{{ $item->name }}</span>
+                                <span class="meat-mania">{{ $item->description }}</span>
+                                <span class="price-6">RM {{ number_format($item->price, 2) }}</span>
+                                <button class="rectangle-4" onclick="addToCart('{{ auth()->id() }}', '{{ $item->name }}', {{ $item->price }})">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             @endforeach
         </div>
+        <!-- End of Category Container -->
     @endforeach
-@endforeach
-    </div>
+</div>
+
   </div>
   <div id="cartPopup" class="cart-popup" style="display: none;">
     <div class="cart-popup-content">

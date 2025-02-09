@@ -45,7 +45,7 @@
             </div>
         </div>
         
-        <a href="{{ route('menu') }}" class="btn btn-primary back-button">Back to Menu</a>
+        <a href="{{ route('menu') }}" class="back-button">Back to Menu</a>
     </div>
 </body>
 </html>

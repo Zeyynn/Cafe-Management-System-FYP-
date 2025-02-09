@@ -21,11 +21,11 @@ class CartController extends Controller
         ->first();
 
     if ($cartItem) {
-        // If item exists, update the quantity
+        
         $cartItem->quantity += $validated['quantity'];
         $cartItem->save();
     } else {
-        // If item doesn't exist, create a new cart item
+        
         Cart::create($validated);
     }
 
@@ -53,7 +53,7 @@ public function removeItem($id)
 public function getCartItems()
 {
 
-    $userId = auth()->id(); // Get the authenticated user's ID
+    $userId = auth()->id(); 
     $cartItems = Cart::where('user_id', $userId)
         ->select('id', 'item_name', 'item_price', 'quantity')
         ->get();

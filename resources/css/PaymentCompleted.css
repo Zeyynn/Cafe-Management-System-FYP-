@@ -92,19 +92,42 @@ body {
 }
 
 .order-summary table {
-    width: 100%; /* Ensure the table spans the full width of the container */
-    margin: 0 auto; /* Center the table within its container */
-    border-collapse: collapse; /* Remove gaps between table cells */
+    width: 100%; 
+    margin: 0 auto; 
+    border-collapse: collapse; 
   }
   
   .order-summary table th,
   .order-summary table td {
-    border: 1px solid #e0e0e0; /* Add a border for clarity */
-    padding: 10px; /* Add spacing inside cells */
-    text-align: center; /* Center the text within the cells */
+    border: 1px solid #e0e0e0; 
+    padding: 10px; 
+    text-align: center; 
   }
   
   .order-summary .totals {
-    text-align: right; /* Align totals section to the right */
+    text-align: right; 
     margin-top: 10px;
   }
+
+  .back-button {
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    background: #353a66;
+    border: none;
+    border-radius: 113px;
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px auto;
+}
+
+
+
+
+
+

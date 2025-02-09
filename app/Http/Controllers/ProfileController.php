@@ -9,33 +9,33 @@ use App\Models\Duwauser;
 
 class ProfileController extends Controller
 {
-    // Show Profile Page
+    
     public function show()
     {
-        // Get the authenticated user from the Duwauser model
+        // Fetch from Duwauser model
         $user = Duwauser::find(Auth::id());
 
-        // Return the ProfilePage view with user data
+        // Return the ProfilePage view with duwauser table
         return view('Manage User Profile.ProfilePage', compact('user'));
     }
 
-    // Show Edit Profile Page
+    
     public function edit()
     {
-        // Get the authenticated user from the Duwauser model
+        // Get data duwauser from the Duwauser model
         $user = Duwauser::find(Auth::id());
 
-        // Return the EditProfilePage view with user data
+        // Return the Edit Profile page with duwauser data
         return view('Manage User Profile.EditProfilePage', compact('user'));
     }
 
-    // Handle Profile Update
+    
     public function update(Request $request)
     {
-        // Get the authenticated user from the Duwauser model
+        // Get data duwauser from the Duwauser model
         $user = Duwauser::find(Auth::id());
 
-        // Validate the input
+        // Inputs
         $request->validate([
             'username' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
@@ -47,7 +47,7 @@ class ProfileController extends Controller
             'drink' => 'nullable|string|max:50',
         ]);
 
-        // Update user data
+        // Updates
         $user->update([
             'name' => $request->username,
             'phone' => $request->phone,
@@ -59,32 +59,31 @@ class ProfileController extends Controller
             'drink' => $request->drink,
         ]);
 
-        // Redirect to profile page with success message
+        // Return the Profile page with updated duwauser data
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 
-    // Handle Password Change
     public function changePassword(Request $request)
     {
-        // Validate the input
+        // Input
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed',
         ]);
 
-        // Get the authenticated user from the Duwauser model
+        // Get data duwauser from the Duwauser model
         $user = Duwauser::find(Auth::id());
 
-        // Check if current password matches
+        // Double check password
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'Current password does not match.']);
         }
 
-        // Update the password
+        // Update  password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        // Redirect with success message
+        // Success
         return redirect()->route('profile')->with('success', 'Password changed successfully.');
     }
 }

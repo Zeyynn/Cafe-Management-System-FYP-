@@ -10,8 +10,12 @@ use App\Http\Controllers\MenuController;
 use App\Models\Menu;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WhatsAppWebhookController;
 
 // Public Routes
+
+Route::post('/webhook/whatsapp', [WhatsAppWebhookController::class, 'handle']);
 
 Route::get('/test', function () {
     return view('include.userHeader');
@@ -102,6 +106,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/process-checkout', [PaymentController::class, 'processCheckout'])->name('process-checkout');
     Route::get('/payment-completed/{orderId}', [PaymentController::class, 'showPaymentCompleted'])->name('payment.completed');
     Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('create-checkout-session');
+
+    
 
 });
 
